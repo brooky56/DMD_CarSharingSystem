@@ -1,9 +1,9 @@
 package main;
 
-import java.util.logging.Logger;
-
 public class Main {
-    public static void main(String[] args) {
 
+
+    public static void main(String[] args) {
+        WorkWithDB workWithDB = new WorkWithDB();
     }
 }

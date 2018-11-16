@@ -4,17 +4,14 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import static utils.UtilsForAll.getMainClass;
 
 public class SQLQuery {
-    private Logger logger;
     private Connection connection;
     private Statement statement;
 
-    public SQLQuery(Logger logger, Connection connection) throws SQLException {
-        this.logger = logger;
+    public SQLQuery(Connection connection) throws SQLException {
         this.connection = connection;
         statement = connection.createStatement();
     }
@@ -26,7 +23,7 @@ public class SQLQuery {
             ResultSet resultSet = statement.executeQuery(strSQL);
             return (resultSet.getInt(1) > 0);
         } catch (SQLException e) {
-            logger.info("Ошибка обращения к таблице: " + tableName);
+            System.out.println("Ошибка обращения к таблице: " + tableName);
             return false;
         }
     }
@@ -55,7 +52,7 @@ public class SQLQuery {
             PreparedStatement preparedStatement = connection.prepareStatement(strSQL);
             InputStream inputStream = getMainClass().getResourceAsStream(strFileNameInResource);
 
-            logger.info("-> добавление файла " + strFileNameInResource + "(" + inputStream.available() + ")");
+            //logger.info("-> добавление файла " + strFileNameInResource + "(" + inputStream.available() + ")");
             preparedStatement.setBinaryStream(1, inputStream, inputStream.available());
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
@@ -64,7 +61,7 @@ public class SQLQuery {
             preparedStatement.close();
 
         } catch (SQLException | IOException e) {
-            logger.info("SQLiteUpdateData: " + e.getMessage());
+            //logger.info("SQLiteUpdateData: " + e.getMessage());
             return false;
         }
         return true;
@@ -87,69 +84,29 @@ public class SQLQuery {
         return execStatement(strSQL);
     }
 
-    public ArrayList<RecordReport> getReport_AllFieldsFromTable(String strTableName) {
-        ArrayList<String> sqlQuery = new ArrayList<>();
-
-        sqlQuery.add("SELECT *");
-        sqlQuery.add("FROM " + strTableName);
-
-        ResultSet resultSQLquery = execSQLquery(sqlQuery);
-        return getReportOnTheRequest(resultSQLquery);
-    }
-
-    private ArrayList<RecordReport> getReportOnTheRequest(ResultSet resultSQLquery) {
-        ArrayList<RecordReport> listReport = new ArrayList<>();
-        if (resultSQLquery == null) return listReport;
-        int nColumnsCount;
-        try {
-            nColumnsCount = resultSQLquery.getMetaData().getColumnCount();
-        } catch (SQLException e) {
-            logger.info("getReportOnTheRequest: " + e.getMessage());
-            return listReport;
-        }
-        if (nColumnsCount == 0) return listReport;
-        try {
-            while (resultSQLquery.next()) {
-                RecordReport recordReport = new RecordReport(nColumnsCount);
-                for (int i = 1; i < nColumnsCount + 1; i++) {
-                    Object iObj = resultSQLquery.getObject(i);
-                    if (iObj != null) {
-                        recordReport.putItemField(i, iObj.toString().trim());
-                    } else {
-                        recordReport.putItemField(i, "");
-                    }
-                }
-                listReport.add(recordReport);
-            }
-        } catch (SQLException e) {
-            logger.info("getReportOnTheRequest: " + e.getMessage());
-        }
-        return listReport;
-    }
-
     private ResultSet execSQLquery(ArrayList<String> sqlQuery) {
         ResultSet resultSQLquery;
         String strSQL = "";
         for (String iStr : sqlQuery) {
             strSQL += iStr + "\n";
         }
-        logger.info("SQL FireBird query: \n" + strSQL);
+        //logger.info("SQL lite query: \n" + strSQL);
 
         try {
             resultSQLquery = statement != null ? statement.executeQuery(strSQL) : null;
         } catch (SQLException e) {
-            logger.info("execSQLquery: " + e.getMessage());
+            //logger.info("execSQLquery: " + e.getMessage());
             return null;
         }
         return resultSQLquery;
     }
 
     private boolean execStatement(String strSQL) {
-        logger.info(strSQL);
+        //logger.info(strSQL);
         try {
             statement.execute(strSQL);
         } catch (SQLException e) {
-            logger.info("Ошибка statement.execute: " + e.getMessage());
+            //logger.info("Ошибка statement.execute: " + e.getMessage());
             return false;
         }
         return true;
@@ -164,7 +121,7 @@ public class SQLQuery {
         try {
             resultSQLquery = statement != null ? statement.executeQuery(strSQL) : null;
         } catch (SQLException e) {
-            logger.info("getFileFromTableAndSaveIt: " + e.getMessage());
+            //logger.info("getFileFromTableAndSaveIt: " + e.getMessage());
         }
         try {
             if (resultSQLquery != null && resultSQLquery.next()) {
@@ -174,7 +131,7 @@ public class SQLQuery {
                     fos = new FileOutputStream(fileBlob);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                    logger.info("getFileFromTableAndSaveIt: ошибка FileOutputStream");
+                    //logger.info("getFileFromTableAndSaveIt: ошибка FileOutputStream");
                     return false;
                 }
 
@@ -192,7 +149,7 @@ public class SQLQuery {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    logger.info("getFileFromTableAndSaveIt: ошибка чтения потока");
+                    //logger.info("getFileFromTableAndSaveIt: ошибка чтения потока");
                     return false;
                 }
                 try {
@@ -201,14 +158,14 @@ public class SQLQuery {
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    logger.info("getFileFromTableAndSaveIt: ошибка закрытия потоков");
+                    //logger.info("getFileFromTableAndSaveIt: ошибка закрытия потоков");
                     return false;
                 }
-                logger.info("<- извлечен файл " + strFileName);
+                //logger.info("<- извлечен файл " + strFileName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            logger.info("getFileFromTableAndSaveIt: " + e.getMessage());
+            //logger.info("getFileFromTableAndSaveIt: " + e.getMessage());
             return false;
         }
 

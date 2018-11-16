@@ -3,15 +3,12 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 public class AccessToSQL {
     private String sConnect;
     private Connection connection = null;
-    private Logger logger;
 
-    public AccessToSQL(Logger log, String sConnect) {
-        logger = log;
+    public AccessToSQL(String sConnect) {
         this.sConnect = sConnect;
     }
 
@@ -23,14 +20,14 @@ public class AccessToSQL {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
-            logger.info("connectToSQLite: SQLite JDBC драйвер не найден");
+            System.out.println("connectToSQLite: SQLite JDBC драйвер не найден");
             return false;
         }
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + sConnect);
-            logger.info("connectToSQLite: БД подключена через JDBC драйвер");
+            System.out.println("connectToSQLite: БД подключена через JDBC драйвер");
         } catch (SQLException e) {
-            logger.info("connectToSQLite: ошибка подключения к БД через JDBC драйвер");
+            System.out.println("connectToSQLite: ошибка подключения к БД через JDBC драйвер");
             return false;
         }
         return true;

@@ -2,15 +2,13 @@ package main;
 
 import db.AccessToSQL;
 
-class WorkWithDB {
+public class WorkWithDB {
     private AccessToSQL accessToSQL;
 
-    WorkWithDB() {
-        initAccessToLite();
-        closeAccessToLite();
+    public WorkWithDB() {
     }
 
-    private void initAccessToLite() {
+    public void initAccessToLite() {
         accessToSQL = new AccessToSQL("testDB.db");
         if (accessToSQL.getAccess()) {
             System.out.println("доступ к БД получен");
@@ -20,8 +18,9 @@ class WorkWithDB {
         }
     }
 
-    private void closeAccessToLite() {
+    public void closeAccessToLite() {
         accessToSQL.closeAccess();
         System.out.println("доступ к БД отключен");
     }
+
 }

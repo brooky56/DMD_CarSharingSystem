@@ -13,7 +13,7 @@ import static utils.ConstantForAll.*;
 public class UtilsForAll {
 
     public static Class getMainClass() {
-        return main.Main.class;
+        return main.WorkWithDB.class;
     }
 
     public static void exitFromProgram() {

@@ -3,26 +3,23 @@ package main;
 import db.AccessToSQL;
 
 public class WorkWithDB {
-    private static final String PathToDatabase = "Database.db";
+    private static final String PATH_Database = "Database.db";
 
-    private AccessToSQL accessToSQL;
-
-    public WorkWithDB() {
+    private WorkWithDB() {
     }
 
-    public void initAccessToLite() {
-        accessToSQL = new AccessToSQL(PathToDatabase);
-        if (accessToSQL.getAccess()) {
-            System.out.println("Access to the database is received");
+    public static void accessDatabase() {
+        if (AccessToSQL.getAccess(PATH_Database)) {
+            System.out.println("Success: access to the database is received");
         } else {
-            System.out.println("Access error to the database");
+            System.out.println("Error: access to the database is denied");
             System.exit(1);
         }
     }
 
-    public void closeAccessToLite() {
-        if (accessToSQL.closeAccess()) {
-            System.out.println("Access to the database is closed");
+    public static void closeDatabase() {
+        if (AccessToSQL.closeAccess()) {
+            System.out.println("Success: access to the database is closed");
         }
     }
 }

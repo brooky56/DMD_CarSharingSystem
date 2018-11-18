@@ -17,8 +17,7 @@ public class StartRun extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        WorkWithDB workWithDB = new WorkWithDB();
-        workWithDB.initAccessToLite();
+        WorkWithDB.accessDatabase();
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
         primaryStage.setTitle("DB table");
         primaryStage.setScene(new Scene(root));

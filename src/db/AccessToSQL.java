@@ -5,37 +5,29 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class AccessToSQL {
-    private String sConnect;
-    private Connection connection = null;
+    private static String path = null;
+    private static Connection connection = null;
 
-    public AccessToSQL(String sConnect) {
-        this.sConnect = sConnect;
+    private AccessToSQL() {
     }
 
-    public boolean getAccess() {
-        return connectToSQLite();
+    public static boolean isClosed() {
+        return connection == null;
     }
 
-    private boolean connectToSQLite() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            System.out.println("connectToSQLite: SQLite JDBC driver is not found");
-            return false;
+    public static boolean getAccess(String path) {
+        if (isClosed()) {
+            AccessToSQL.path = path;
+            return connectToSQLite();
         }
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + sConnect);
-            System.out.println("connectToSQLite: a database is connected through JDBC driver");
-        } catch (SQLException e) {
-            System.out.println("connectToSQLite: connection error to database through JDBC driver");
-            return false;
-        }
-        return true;
+        return false;
     }
 
-    public boolean closeAccess() {
+    public static boolean closeAccess() {
+        if (isClosed()) return false;
         try {
             connection.close();
+            connection = null;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -43,7 +35,31 @@ public class AccessToSQL {
         return true;
     }
 
-    public Connection getConnection() {
+    public static boolean restoreAccess() {
+        if (isClosed()) {
+            return connectToSQLite();
+        }
+        return false;
+    }
+
+    public static Connection getConnection() {
         return connection;
+    }
+
+    private static boolean connectToSQLite() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            System.out.println("connectToSQLite: SQLite JDBC driver is not found");
+            return false;
+        }
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+            System.out.println("connectToSQLite: the database is connected through JDBC driver");
+        } catch (SQLException e) {
+            System.out.println("connectToSQLite: error: the database is not connected through JDBC driver");
+            return false;
+        }
+        return true;
     }
 }

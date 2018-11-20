@@ -22,7 +22,5 @@ public class StartRun extends Application {
         primaryStage.setTitle("Self-driving management system ");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        Controller controller = new Controller();
-        controller.initData();
     }
 }

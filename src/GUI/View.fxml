@@ -22,12 +22,9 @@
             <Button fx:id="executeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Execute query" />
          </children>
       </VBox>
-      <VBox layoutX="436.0" layoutY="34.0" prefHeight="46.0" prefWidth="150.0">
-         <children>
-            <ComboBox fx:id="dbTableBox" editable="true" prefHeight="27.0" prefWidth="150.0" promptText="Choose  the table" />
-            <Button fx:id="buttonShowTable" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Show table" />
-         </children>
-      </VBox>
       <TableView fx:id="table" layoutX="14.0" layoutY="90.0" prefHeight="303.0" prefWidth="572.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0" />
+      <ComboBox fx:id="dbTableBox" editable="true" layoutX="436.0" layoutY="33.0" prefHeight="27.0" prefWidth="150.0" promptText="Choose  the table" visibleRowCount="20" />
+      <Button fx:id="buttonShowTable" layoutX="435.0" layoutY="60.0" mnemonicParsing="false" onAction="#onButtonShowClick" prefHeight="25.0" prefWidth="82.0" text="Show table" />
+      <Button fx:id="buttonClearTableView" layoutX="518.0" layoutY="60.0" mnemonicParsing="false" onAction="#onButtonClearClick" prefHeight="25.0" prefWidth="68.0" text="Clear" />
    </children>
 </AnchorPane>

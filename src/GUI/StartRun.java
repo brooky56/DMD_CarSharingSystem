@@ -19,8 +19,10 @@ public class StartRun extends Application {
     public void start(Stage primaryStage) throws IOException {
         WorkWithDB.accessDatabase();
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
-        primaryStage.setTitle("DB table");
+        primaryStage.setTitle("Self-driving management system ");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        Controller controller = new Controller();
+        controller.initData();
     }
 }

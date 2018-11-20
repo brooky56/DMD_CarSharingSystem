@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
-    <children>
-        <TableView fx:id="tableUsers" layoutX="14.0" layoutY="50.0" prefHeight="200.0" prefWidth="571.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="50.0">
-            <columns>
-                <!-- Колонки таблицы -->
-                <TableColumn fx:id="idColumn" prefWidth="80.0" text="№" />
-                <TableColumn fx:id="loginColumn" prefWidth="150.0" text="Login" />
-                <TableColumn fx:id="passwordColumn" prefWidth="150.0" text="Password" />
-                <TableColumn fx:id="emailColumn" prefWidth="220.0" text="Email" />
-            </columns>
-        </TableView>
-        <Button fx:id="buttonClick" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onButtonClick" text="Click" />
-    </children>
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="421.0" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <Label fx:id="queryLabel" prefHeight="14.0" prefWidth="215.0" text="Query field:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="queryField" prefHeight="27.0" prefWidth="421.0" />
+            <Button fx:id="executeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Execute query" />
+         </children>
+      </VBox>
+      <VBox layoutX="436.0" layoutY="34.0" prefHeight="46.0" prefWidth="150.0">
+         <children>
+            <ComboBox fx:id="dbTableBox" editable="true" prefHeight="27.0" prefWidth="150.0" promptText="Choose  the table" />
+            <Button fx:id="buttonShowTable" mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Show table" />
+         </children>
+      </VBox>
+      <TableView fx:id="table" layoutX="14.0" layoutY="90.0" prefHeight="303.0" prefWidth="572.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0" />
+   </children>
 </AnchorPane>

@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import main.Common;
-import objects.Table;
+import main.Table;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

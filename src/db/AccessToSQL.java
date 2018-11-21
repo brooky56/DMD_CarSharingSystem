@@ -50,14 +50,15 @@ public class AccessToSQL {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
-            System.out.println("connectToSQLite: SQLite JDBC driver is not found");
+            e.printStackTrace();
             return false;
         }
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+            connection.setAutoCommit(false);
             System.out.println("connectToSQLite: the database is connected through JDBC driver");
         } catch (SQLException e) {
-            System.out.println("connectToSQLite: error: the database is not connected through JDBC driver");
+            e.printStackTrace();
             return false;
         }
         return true;

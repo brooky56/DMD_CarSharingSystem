@@ -2,7 +2,6 @@ package main;
 
 import db.ConnectionToSQL;
 import db.Predefined;
-import objects.Table;
 
 import java.sql.Connection;
 

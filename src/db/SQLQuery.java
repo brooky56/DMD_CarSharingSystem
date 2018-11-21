@@ -3,7 +3,7 @@ package db;
 import java.sql.*;
 import java.util.LinkedList;
 
-import Objects.Table;
+import objects.Table;
 
 public class SQLQuery {
     private SQLQuery() {

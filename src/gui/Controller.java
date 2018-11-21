@@ -1,6 +1,5 @@
 package gui;
 
-import main.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Callback;
+import main.Common;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -35,7 +35,7 @@ public class Controller {
 
     private void initData() throws SQLException {
         ObservableList<String> tableList = FXCollections.observableArrayList();
-        ResultSet tableSet = main.Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table'");
+        ResultSet tableSet = main.Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
         while (tableSet.next()) {
             for (int i = 0; i < tableSet.getMetaData().getColumnCount(); i++) {
                 tableList.add(tableSet.getString(i + 1));
@@ -46,14 +46,33 @@ public class Controller {
     }
 
     @FXML
+    private void handleTextFieldAction() {
+        if (!queryField.getText().equals("")) {
+            executeButton.setDisable(false);
+        } else {
+            executeButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void handleComboBoxAction() {
+        if (!dbTableBox.getValue().equals("")) {
+            buttonShowTable.setDisable(false);
+        } else {
+            buttonShowTable.setDisable(true);
+        }
+    }
+
+
+    @FXML
     private void onButtonShowClick() {
+        clear();
         String tableNeeded = dbTableBox.getValue();
         String selectQuery = "SELECT * FROM " + tableNeeded;
         buildData(selectQuery);
     }
 
-    @FXML
-    private void onButtonClearClick() {
+    private void clear() {
         for (int i = 0; i < table.getItems().size(); i++) {
             table.getItems().clear();
         }
@@ -62,14 +81,22 @@ public class Controller {
 
     @FXML
     private void onButtonExecuteQueryClick() {
+        clear();
         String query = queryField.getText();
-        System.out.println(query);
-        buildData(query);
+        if (query != null) {
+            System.out.println(query);
+            buildData(query);
+        } else {
+            executeButton.setDisable(false);
+        }
     }
 
     @FXML
     private void initialize() throws SQLException {
         initData();
+        table.setEditable(false);
+        executeButton.setDisable(true);
+        buttonShowTable.setDisable(true);
     }
 
     private ObservableList<ObservableList> data;
@@ -94,7 +121,6 @@ public class Controller {
                 table.getColumns().addAll(col);
                 System.out.println("Column [" + i + "] ");
             }
-
 
             // Data added to ObservableList
             while (rs.next()) {

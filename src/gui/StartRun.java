@@ -1,11 +1,11 @@
 package gui;
 
-import main.Common;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.Common;
 
 import java.io.IOException;
 

@@ -9,6 +9,7 @@ import java.sql.Connection;
 public class Common {
     public static final String PATH_Database = "Database.db";
     private static ConnectionToSQL access;
+    public static final String NULL_ELEMENT = "<null>";
 
     public static void establishConnection() {
         access = new ConnectionToSQL(PATH_Database);

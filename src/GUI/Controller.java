@@ -35,7 +35,7 @@ public class Controller {
 
     private void initData() throws SQLException {
         ObservableList<String> tableList = FXCollections.observableArrayList();
-        ResultSet tableSet = Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table'");
+        ResultSet tableSet = main.Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table'");
         while (tableSet.next()) {
             for (int i = 0; i < tableSet.getMetaData().getColumnCount(); i++) {
                 tableList.add(tableSet.getString(i + 1));

@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 import main.Common;
-import objects.Table;
+import main.Table;
 
 public class SQLQuery {
     private SQLQuery() {

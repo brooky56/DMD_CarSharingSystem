@@ -1,7 +1,7 @@
 package db;
 
 import main.Common;
-import objects.Table;
+import main.Table;
 
 public class Predefined {
 
@@ -18,7 +18,6 @@ public class Predefined {
                 "SELECT CAST(strftime('%H', DateTime_start) AS INTEGER), count(DateTime_start) " +
                         "FROM ChargingHistory WHERE date(DateTime_start) = date('" + date +
                         "') GROUP BY strftime('%H', DateTime_start);");
-        System.out.println(t.toString());
         Table res = new Table(13, 2);
         res.setTitle("Before noon", 0);
         res.setTitle("After noon", 1);

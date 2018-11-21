@@ -3,14 +3,16 @@ package db;
 import java.sql.*;
 import java.util.LinkedList;
 
-import Objects.Table;
+import main.Common;
+import objects.Table;
 
 public class SQLQuery {
     private SQLQuery() {
     }
 
-    public static void ExecuteQueryNoOutput(Connection c, String command) {
+    public static void executeQueryNoOutput(String command) {
         try {
+            Connection c = Common.connection();
             Statement stmt = c.createStatement();
             stmt.executeUpdate(command);
             c.commit();
@@ -20,9 +22,10 @@ public class SQLQuery {
         }
     }
 
-    public static Table ExecuteQueryWithOutput(Connection c, String command) {
+    public static Table executeQueryWithOutput(String command) {
         try {
             // Creating database objects
+            Connection c = Common.connection();
             Statement stmt = c.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = stmt.executeQuery(command);
             ResultSetMetaData data = rs.getMetaData();

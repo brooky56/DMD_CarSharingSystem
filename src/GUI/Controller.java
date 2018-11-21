@@ -1,6 +1,6 @@
-package GUI;
+package gui;
 
-import Main.*;
+import main.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

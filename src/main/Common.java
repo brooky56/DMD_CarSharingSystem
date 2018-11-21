@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import db.ConnectionToSQL;
 
@@ -18,5 +18,9 @@ public class Common {
 
     public static void closeConnection() {
         access.closeConnection();
+    }
+
+    public static void main(String[] args) {
+
     }
 }

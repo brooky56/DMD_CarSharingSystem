@@ -1,6 +1,6 @@
-package GUI;
+package gui;
 
-import Main.Common;
+import main.Common;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

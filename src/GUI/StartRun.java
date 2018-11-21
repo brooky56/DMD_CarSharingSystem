@@ -1,11 +1,11 @@
 package GUI;
 
+import Main.Common;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import main.WorkWithDB;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class StartRun extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        WorkWithDB.accessDatabase();
+        Common.establishConnection();
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
         primaryStage.setTitle("Self-driving management system ");
         primaryStage.setScene(new Scene(root));

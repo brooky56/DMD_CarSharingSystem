@@ -43,17 +43,9 @@ public class Table {
         return table[row];
     }
 
-    public Object[] getTitles() {
-        return getRow(0);
-    }
-
     public Object getCell(int row, int column) {
         checkCellIndex(row, column);
         return table[row][column];
-    }
-
-    public Object getTitle(int column) {
-        return getCell(0, column);
     }
 
     public void setRow(Object[] o, int row) {
@@ -64,13 +56,21 @@ public class Table {
         table[row] = o;
     }
 
+    public void setCell(Object o, int row, int column) {
+        checkCellIndex(row, column);
+        table[row][column] = o;
+    }
+
+    public Object[] getTitles() {
+        return getRow(0);
+    }
+
     public void setTitles(Object[] o) {
         setRow(o, 0);
     }
 
-    public void setCell(Object o, int row, int column) {
-        checkCellIndex(row, column);
-        table[row][column] = o;
+    public Object getTitle(int column) {
+        return getCell(0, column);
     }
 
     public void setTitle(Object o, int column) {
@@ -121,19 +121,4 @@ public class Table {
         }
         return out;
     }
-
-//    public static void main(String[] args) {
-//        Table t = new Table(5, 3);
-//        String[] s = {"ID", "Name", "Phone"};
-//        t.setTitles(s);
-//        Object[] o1 = {1, "Vas", "10-20"};
-//        t.setRow(o1, 1);
-//        Object[] o2 = {2, "Peta", "45-27"};
-//        t.setRow(o2, 2);
-//        Object[] o3 = {3, "Andrey", "+375"};
-//        t.setRow(o3, 3);
-//        Object[] o4 = {4, "Sash", "+8 029"};
-//        t.setRow(o4, 4);
-//        System.out.println(t.toString());
-//    }
 }

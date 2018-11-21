@@ -1,6 +1,6 @@
 package GUI;
 
-import db.AccessToSQL;
+import Main.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -35,7 +35,7 @@ public class Controller {
 
     private void initData() throws SQLException {
         ObservableList<String> tableList = FXCollections.observableArrayList();
-        ResultSet tableSet = AccessToSQL.getConnection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table'");
+        ResultSet tableSet = Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table'");
         while (tableSet.next()) {
             for (int i = 0; i < tableSet.getMetaData().getColumnCount(); i++) {
                 tableList.add(tableSet.getString(i + 1));
@@ -43,7 +43,6 @@ public class Controller {
             }
         }
         dbTableBox.setItems(tableList);
-
     }
 
     @FXML
@@ -60,8 +59,9 @@ public class Controller {
         }
         table.getColumns().clear();
     }
+
     @FXML
-    private void onButtonExecuteQueryClick(){
+    private void onButtonExecuteQueryClick() {
         String query = queryField.getText();
         System.out.println(query);
         buildData(query);
@@ -81,7 +81,7 @@ public class Controller {
 
         data = FXCollections.observableArrayList();
         try {
-            c = AccessToSQL.getConnection();
+            c = Common.connection();
             //ResultSet
             ResultSet rs = c.createStatement().executeQuery(SQL);
 

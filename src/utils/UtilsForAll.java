@@ -12,9 +12,9 @@ import static utils.ConstantForAll.*;
 
 public class UtilsForAll {
 
-    public static Class getMainClass() {
-        return main.WorkWithDB.class;
-    }
+//    public static Class getMainClass() {
+//        return main.WorkWithDB.class;
+//    }
 
     public static void exitFromProgram() {
         System.exit(0);

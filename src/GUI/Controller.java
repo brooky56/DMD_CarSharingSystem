@@ -60,6 +60,12 @@ public class Controller {
         }
         table.getColumns().clear();
     }
+    @FXML
+    private void onButtonExecuteQueryClick(){
+        String query = queryField.getText();
+        System.out.println(query);
+        buildData(query);
+    }
 
     @FXML
     private void initialize() throws SQLException {
@@ -85,7 +91,6 @@ public class Controller {
                 final int j = i;
                 col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
                 col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-
                 table.getColumns().addAll(col);
                 System.out.println("Column [" + i + "] ");
             }

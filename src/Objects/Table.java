@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class Table {
     private Object[][] table;
-    private int width;
-    private int height;
+    public final int width;
+    public final int height;
     public String separator = ", ";
 
     public Table(int rowsN, int columnsN) {
@@ -30,17 +30,22 @@ public class Table {
         }
     }
 
-    public int getColumnsCount() {
-        return width;
-    }
-
-    public int getRowsCount() {
-        return height;
-    }
-
     public Object[] getRow(int row) {
         checkRowIndex(row);
-        return table[row];
+        Object[] o = new Object[width];
+        for (int j = 0; j < height; ++j) {
+            o[j] = table[row][j];
+        }
+        return o;
+    }
+
+    public Object[] getColumn(int column) {
+        checkColumnIndex(column);
+        Object[] o = new Object[height];
+        for (int i = 0; i < height; ++i) {
+            o[i] = table[i][column];
+        }
+        return o;
     }
 
     public Object getCell(int row, int column) {
@@ -53,7 +58,19 @@ public class Table {
         if (o.length != width) {
             throw new IllegalArgumentException("Passed row has inappropriate amount of columns");
         }
-        table[row] = o;
+        for (int j = 0; j < height; ++j) {
+            table[row][j] = o[j];
+        }
+    }
+
+    public void setColumn(Object[] o, int column) {
+        checkColumnIndex(column);
+        if (o.length != height) {
+            throw new IllegalArgumentException("Passed column has inappropriate amount of rows");
+        }
+        for (int i = 0; i < height; ++i) {
+            table[i][column] = o[i];
+        }
     }
 
     public void setCell(Object o, int row, int column) {
@@ -83,15 +100,19 @@ public class Table {
         }
     }
 
-    private void checkCellIndex(int row, int column) {
-        checkRowIndex(row);
+    private void checkColumnIndex(int column) {
         if (column < 0 || column >= width) {
             throw new IndexOutOfBoundsException("Passed column index is out of range");
         }
     }
 
+    private void checkCellIndex(int row, int column) {
+        checkRowIndex(row);
+        checkColumnIndex(column);
+    }
+
     private static String addSpaces(String s, int amount) {
-        for (int row = 0; row < amount; ++row) {
+        for (int a = 0; a < amount; ++a) {
             s = " " + s;
         }
         return s;
@@ -99,22 +120,28 @@ public class Table {
 
     public String toString() {
         int[] max = new int[width];
-        for (int column = 0; column < width; ++column) {
-            for (int row = 0; row < height; ++row) {
-                int l = (table[row][column].toString()).length();
-                if (l > max[column]) {
-                    max[column] = l;
+        Table temp = new Table(height, width);
+        for (int j = 0; j < width; ++j) {
+            for (int i = 0; i < height; ++i) {
+                if (table[i][j] == null) {
+                    temp.setCell("<null>", i, j);
+                } else {
+                    temp.setCell(table[i][j].toString(), i, j);
+                }
+                int l = ((String) temp.table[i][j]).length();
+                if (l > max[j]) {
+                    max[j] = l;
                 }
             }
         }
         String out = "";
-        for (int row = 0; row < height; ++row) {
-            for (int column = 0; column < width; ++column) {
-                String s = table[row][column].toString();
-                if (column == width - 1) {
-                    out += addSpaces(s, max[column] - s.length());
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                String s = (String) temp.table[i][j];
+                if (j == width - 1) {
+                    out += addSpaces(s, max[j] - s.length());
                 } else {
-                    out += addSpaces(s, max[column] - s.length()) + separator;
+                    out += addSpaces(s, max[j] - s.length()) + separator;
                 }
             }
             out += "\n";

@@ -67,7 +67,7 @@ CREATE TABLE Cars
 (
   CarID      INTEGER primary key autoincrement,
   ModelID    INTEGER not null references CarModels,
-  Reg_number TEXT    not null
+  Reg_number TEXT    not null unique
 );
 
 CREATE TABLE TariffHistory
@@ -86,7 +86,7 @@ CREATE TABLE Rents
   GPSloc_start   TEXT     not null,
   DateTime_end   DATETIME not null,
   GPSloc_end     TEXT     not null
---   Costed         REAL     not null
+--   Paid           REAL     not null
 );
 
 CREATE TABLE Parks
@@ -109,7 +109,7 @@ CREATE TABLE ChargingStations
   UID      INTEGER primary key autoincrement,
   NSockets INTEGER not null,
   GPSloc   TEXT    not null,
-  CostKW   REAL    not null,
+  CostHour REAL    not null,
   Shape    TEXT    not null
 );
 
@@ -182,4 +182,35 @@ CREATE TABLE PartsUsed
 );
 
 COMMIT;
+
+
+BEGIN TRANSACTION;
+  INSERT INTO CarModels (Manufacturer, Name, Color) VALUES ('Volkswagen', 'Golf', 'Blue');
+  INSERT INTO CarModels (Manufacturer, Name, Color) VALUES ('Mercedes', 'Benz', 'White');
+  INSERT INTO CarModels (Manufacturer, Name, Color) VALUES ('Ford', 'Galaxy', 'Black');
+
+  INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'AN102030');
+  INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'AN122131');
+  INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'BN000000');
+  INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'EU201809');
+  INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'RU202020');
+
+  INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'Basic');
+  INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (15, '40, 50', 10.5, 'Basic');
+  INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'Basic');
+
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (1, 1, '2017-12-01 12:00', '2017-12-01 13:00', 100.5);
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (1, 2, '2017-12-01 20:00', '2017-12-01 21:00', 100.5);
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (2, 1, '2017-12-01 20:00', '2017-12-01 20:45', 50.0);
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (2, 2, '2017-12-02 09:00', '2017-12-02 09:45', 50.0);
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (3, 3, '2018-11-02 09:00', '2018-12-02 09:30', 1000.0);
+  INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Paid)
+    VALUES (3, 2, '2018-11-04 09:00', NULL, NULL);
+COMMIT;
+
 VACUUM;

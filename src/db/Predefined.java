@@ -6,18 +6,31 @@ import main.Table;
 public class Predefined {
 
     // First SELECT query
-    public static Table findCar(String RegNumberPart, String color) {
+    public static Table findCar(String colorNregnum) {
+        colorNregnum = colorNregnum.trim();
+        String[] in = colorNregnum.split("\\s");
+        String color, regnum;
+        if (in.length >= 2) {
+            color = in[0];
+            regnum = in[1];
+        } else {
+            color = "";
+            regnum = "";
+        }
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID, Manufacturer, Name FROM Cars NATURAL JOIN CarModels WHERE Color = '" + color +
-                        "' AND Reg_number LIKE('" + RegNumberPart + "%');");
+                "SELECT CarID FROM Cars NATURAL JOIN CarModels WHERE Color = '" + color +
+                        "' AND Reg_number LIKE('%" + regnum + "%');");
     }
 
     // Second SELECT query
     public static Table socketsPerHour(String date) {
+        date = date.trim();
         Table t = SQLQuery.executeQueryWithOutput(
                 "SELECT CAST(strftime('%H', DateTime_start) AS INTEGER), count(DateTime_start) " +
                         "FROM ChargingHistory WHERE date(DateTime_start) = date('" + date +
                         "') GROUP BY strftime('%H', DateTime_start);");
+        if (t == null) return null;
+
         Table res = new Table(13, 2);
         res.setTitle("Before noon", 0);
         res.setTitle("After noon", 1);
@@ -37,5 +50,37 @@ public class Predefined {
             }
         }
         return out + "0";
+    }
+
+    // Third SELECT query
+    public static Table busyPerPeriod(String date) {
+        date = date.trim();
+        String command = "SELECT count(DISTINCT CarID) * 100 / (SELECT count(CarID) FROM Cars) FROM Rents " +
+                "WHERE CAST(strftime('%s', DateTime_start) AS INTEGER) >= CAST(strftime('%s', '" + date + "', '-7 days') AS INTEGER) " +
+                "AND CAST(strftime('%s', DateTime_start) AS INTEGER) <= CAST(strftime('%s', '" + date + "') AS INTEGER)" +
+                " AND CAST(strftime('%H', DateTime_start) AS INTEGER) >= ";
+        String scnd = " AND CAST(strftime('%H', DateTime_start) AS INTEGER) <= ";
+
+        Table morning = SQLQuery.executeQueryWithOutput(
+                command + Common.Morning_Start + scnd + Common.Morning_End + ";");
+        if (morning == null) return null;
+
+        Table afternoon = SQLQuery.executeQueryWithOutput(
+                command + Common.Afternoon_Start + scnd + Common.Afternoon_End + ";");
+        if (afternoon == null) return null;
+
+        Table evening = SQLQuery.executeQueryWithOutput(
+                command + Common.Evening_Start + scnd + Common.Evening_End + ";");
+        if (evening == null) return null;
+
+        Table res = new Table(2, 3);
+        res.setTitle("Morning", 0);
+        res.setTitle("Afternoon", 1);
+        res.setTitle("Evening", 2);
+        res.setCell(morning.getCell(1, 0).toString() + "%", 1, 0);
+        res.setCell(afternoon.getCell(1, 0).toString() + "%", 1, 1);
+        res.setCell(evening.getCell(1, 0).toString() + "%", 1, 2);
+
+        return res;
     }
 }

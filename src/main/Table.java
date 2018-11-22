@@ -124,7 +124,7 @@ public class Table {
         for (int j = 0; j < width; ++j) {
             for (int i = 0; i < height; ++i) {
                 if (table[i][j] == null) {
-                    temp.setCell("<null>", i, j);
+                    temp.setCell(Common.NULL_ELEMENT, i, j);
                 } else {
                     temp.setCell(table[i][j].toString(), i, j);
                 }

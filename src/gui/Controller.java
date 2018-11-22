@@ -14,7 +14,6 @@ import javafx.util.Callback;
 import main.Common;
 import main.Table;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Controller {
@@ -67,14 +66,13 @@ public class Controller {
     @FXML
     private TableView<ObservableList> table;
 
-    private void fullFillTableList() throws SQLException {
+    private void fullFillTableList() {
         ObservableList<String> tableList = FXCollections.observableArrayList();
-        ResultSet tableSet = main.Common.connection().createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
-        while (tableSet.next()) {
-            for (int i = 0; i < tableSet.getMetaData().getColumnCount(); i++) {
-                tableList.add(tableSet.getString(i + 1));
-                System.out.println(tableSet.getString(i + 1));
-            }
+        Table t = SQLQuery.executeQueryWithOutput(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
+        for (int i = 1; i < t.height; ++i) {
+            tableList.add(t.getCell(i, 0).toString());
+            System.out.println(t.getCell(i, 0).toString());
         }
         dbTableBox.setItems(tableList);
     }
@@ -119,37 +117,30 @@ public class Controller {
         }
     }
 
-
     @FXML
     private void onButtonShowClick() {
         clear();
         String tableNeeded = dbTableBox.getValue();
         String selectQuery = "SELECT * FROM " + tableNeeded;
-        buildTable(selectQuery);
+        buildViewByCommand(selectQuery);
     }
 
     @FXML
     private void onButtonShowQueryResultClick() {
         clear();
-        String[] inputLine;
+        String input = textAreaForInput.getText();
         String numberOfQuery = predefinedQueryBox.getValue();
-
-        if (!textAreaForInput.getText().equals("")) {
-            inputLine = textAreaForInput.getText().split("\\n");
-        } else {
-            inputLine = null;
-        }
 
         Table t = null;
         switch (numberOfQuery) {
             case "Query 1":
-                t = Predefined.findCar(inputLine[0], inputLine[1]);
+                t = Predefined.findCar(input);
                 break;
             case "Query 2":
-                t = Predefined.socketsPerHour(inputLine[0]);
+                t = Predefined.socketsPerHour(input);
                 break;
         }
-        buildPredefinedQuery(t);
+        buildViewFromTable(t);
     }
 
     private void clear() {
@@ -167,7 +158,7 @@ public class Controller {
         System.out.println(f);
         if (query != null && !f) {
             System.out.println(query + " " + f);
-            buildTable(query);
+            buildViewByCommand(query);
         } else if (query != null && f) {
             System.out.println(query + " " + f);
             SQLQuery.executeQueryNoOutput(query);
@@ -188,33 +179,13 @@ public class Controller {
     private ObservableList<String> row;
     private TableColumn col;
 
-    private void buildTable(String SQL) {
-        Table t = SQLQuery.executeQueryWithOutput(SQL);
-        data = FXCollections.observableArrayList();
-        for (int i = 0; i < t.width; i++) {
-            col = new TableColumn(t.getTitle(i).toString());
-            final int j = i;
-            col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-            table.getColumns().add(col);
-            System.out.println("Column [" + i + "] ");
-        }
-
-        for (int i = 1; i < t.height; i++) {
-            row = FXCollections.observableArrayList();
-            for (int j = 0; j < t.width; j++) {
-                if (t.getCell(i, j) == null) {
-                    row.add(Common.NULL_ELEMENT);
-                } else {
-                    row.add(t.getCell(i, j).toString());
-                }
-            }
-            System.out.println("Row [" + i + "] added " + row);
-            data.add(row);
-        }
-        table.setItems(data);
+    private void buildViewByCommand(String SQL) {
+        buildViewFromTable(SQLQuery.executeQueryWithOutput(SQL));
     }
 
-    private void buildPredefinedQuery(Table t) {
+    private void buildViewFromTable(Table t) {
+        if (t == null) return;
+
         data = FXCollections.observableArrayList();
         for (int i = 0; i < t.width; i++) {
             col = new TableColumn(t.getTitle(i).toString());

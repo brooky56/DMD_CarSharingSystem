@@ -55,7 +55,7 @@ public class Controller {
     private Button executeButton;
 
     @FXML
-    private TextField queryField;
+    private TextArea queryField;
 
     @FXML
     private ComboBox<String> dbTableBox = new ComboBox<>();
@@ -139,6 +139,30 @@ public class Controller {
             case "Query 2":
                 t = Predefined.socketsPerHour(input);
                 break;
+            case "Query 3":
+                t = Predefined.busyPerPeriod(input);
+                break;
+            case "Query 4":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 5":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 6":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 7":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 8":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 9":
+                //t = Predefined.socketsPerHour(input);
+                break;
+            case "Query 10":
+                //t = Predefined.socketsPerHour(input);
+                break;
         }
         buildViewFromTable(t);
     }
@@ -170,7 +194,6 @@ public class Controller {
     private void initialize() throws SQLException {
         initData();
         table.setEditable(false);
-        executeButton.setDisable(true);
         buttonShowTable.setDisable(true);
         predefinedResultButton.setDisable(true);
     }

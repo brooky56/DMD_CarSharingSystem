@@ -1,29 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="70.0" prefWidth="421.0" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <VBox fx:id="CustomVBox" layoutX="14.0" layoutY="14.0" prefHeight="100.0" prefWidth="209.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
          <children>
-            <Label fx:id="queryLabel" prefHeight="14.0" prefWidth="215.0" text="Query field:">
+            <Label fx:id="queryLabel" prefHeight="14.0" prefWidth="215.0" text="Custom Query:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="queryField" onAction="#handleTextFieldAction" prefHeight="27.0" prefWidth="421.0" />
+            <TextField fx:id="queryField" onAction="#handleTextFieldAction" prefHeight="25.0" prefWidth="209.0" promptText="Your custom query" />
+            <HBox fx:id="CustomFieldHBox" prefHeight="25.0" prefWidth="200.0">
+               <children>
+                  <CheckBox fx:id="updateQueryCheckBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Update query" />
+               </children>
+            </HBox>
             <Button fx:id="executeButton" mnemonicParsing="false" onAction="#onButtonExecuteQueryClick" prefHeight="25.0" prefWidth="127.0" text="Execute query" />
          </children>
       </VBox>
-      <TableView fx:id="table" layoutX="14.0" layoutY="90.0" prefHeight="303.0" prefWidth="572.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0" />
-      <ComboBox fx:id="dbTableBox" editable="true" layoutX="436.0" layoutY="33.0" onAction="#handleComboBoxAction" prefHeight="27.0" prefWidth="150.0" promptText="Choose  the table" visibleRowCount="20" />
-      <Button fx:id="buttonShowTable" layoutX="435.0" layoutY="60.0" mnemonicParsing="false" onAction="#onButtonShowClick" prefHeight="25.0" prefWidth="82.0" text="Show table" />
+      <TableView fx:id="table" layoutX="14.0" layoutY="137.0" prefHeight="255.0" prefWidth="572.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="137.0" />
+      <VBox fx:id="predefinedQueryVBox" layoutX="223.0" layoutY="15.0" prefHeight="125.0" prefWidth="209.0" AnchorPane.leftAnchor="223.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label fx:id="predefinedQueryLabel" prefHeight="14.0" prefWidth="230.0" text="Predefined Query:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="predefinedQueryBox" editable="true" onAction="#handlePredefinedComboBoxAction" prefHeight="25.0" prefWidth="209.0" promptText="Choose the query" />
+            <TextArea fx:id="textAreaForInput" prefHeight="50.0" prefWidth="209.0" promptText="Input for the query" />
+            <Button fx:id="predefinedResultButton" mnemonicParsing="false" onAction="#onButtonShowQueryResultClick" prefHeight="25.0" prefWidth="210.0" text="Show result" />
+         </children>
+      </VBox>
+      <VBox fx:id="tableListVBox" layoutX="433.0" layoutY="13.0" prefHeight="125.0" prefWidth="155.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label fx:id="tableListLabel" prefHeight="14.0" prefWidth="150.0" text="Table list:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="dbTableBox" editable="true" onAction="#handleComboBoxAction" prefHeight="25.0" prefWidth="156.0" promptText="Choose  the table" visibleRowCount="20" />
+            <Button fx:id="buttonShowTable" mnemonicParsing="false" onAction="#onButtonShowClick" prefHeight="25.0" prefWidth="82.0" text="Show table" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

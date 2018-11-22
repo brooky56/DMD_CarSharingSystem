@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class Controller {
 
     @FXML
-    private CheckBox updateQueryCheckBox;
+    public CheckBox updateQueryCheckBox;
 
     @FXML
     private HBox CustomFieldHBox;
@@ -37,58 +37,34 @@ public class Controller {
     private VBox CustomVBox;
 
     @FXML
-    private Button predefinedResultButton;
+    public Button predefinedResultButton;
 
     @FXML
-    private VBox predefinedQueryVBox;
+    public VBox predefinedQueryVBox;
 
     @FXML
-    private TextArea textAreaForInput;
+    public TextArea textAreaForInput;
 
     @FXML
-    private ComboBox<String> predefinedQueryBox;
+    public ComboBox<String> predefinedQueryBox;
 
     @FXML
-    private Button buttonShowTable;
+    public Button buttonShowTable;
 
     @FXML
-    private Button executeButton;
+    public Button executeButton;
 
     @FXML
-    private TextArea queryField;
+    public TextArea queryField;
 
     @FXML
-    private ComboBox<String> dbTableBox = new ComboBox<>();
+    public ComboBox<String> dbTableBox = new ComboBox<>();
 
     @FXML
     private Label queryLabel;
 
     @FXML
-    private TableView<ObservableList> table;
-
-    private void fullFillTableList() {
-        ObservableList<String> tableList = FXCollections.observableArrayList();
-        Table t = SQLQuery.executeQueryWithOutput(
-                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
-        for (int i = 1; i < t.height; ++i) {
-            tableList.add(t.getCell(i, 0).toString());
-            System.out.println(t.getCell(i, 0).toString());
-        }
-        dbTableBox.setItems(tableList);
-    }
-
-    private void fullFillPredefinedQueryList() {
-        ObservableList<String> queryList = FXCollections.observableArrayList();
-        for (int i = 1; i < 11; i++) {
-            queryList.add("Query " + i);
-        }
-        predefinedQueryBox.setItems(queryList);
-    }
-
-    private void initData() throws SQLException {
-        fullFillTableList();
-        fullFillPredefinedQueryList();
-    }
+    public TableView<ObservableList> table;
 
     @FXML
     private void handleTextFieldAction() {
@@ -103,6 +79,32 @@ public class Controller {
     private void handlePredefinedComboBoxAction() {
         if (!predefinedQueryBox.getValue().equals("")) {
             predefinedResultButton.setDisable(false);
+            String numberOfQuery = predefinedQueryBox.getValue();
+            switch (numberOfQuery) {
+                case "Query 1":
+                    textAreaForInput.setPromptText("White AN122131");
+                    break;
+                case "Query 2":
+                    textAreaForInput.setPromptText("2017-12-01");
+                    break;
+                case "Query 3":
+                    textAreaForInput.setPromptText("2018-01-01 07:00:00");
+                    break;
+                case "Query 4":
+                    break;
+                case "Query 5":
+                    break;
+                case "Query 6":
+                    break;
+                case "Query 7":
+                    break;
+                case "Query 8":
+                    break;
+                case "Query 9":
+                    break;
+                case "Query 10":
+                    break;
+            }
         } else {
             predefinedResultButton.setDisable(true);
         }
@@ -128,9 +130,9 @@ public class Controller {
     @FXML
     private void onButtonShowQueryResultClick() {
         clear();
-        String input = textAreaForInput.getText();
         String numberOfQuery = predefinedQueryBox.getValue();
-
+        String input = textAreaForInput.getText();
+        ;
         Table t = null;
         switch (numberOfQuery) {
             case "Query 1":
@@ -167,13 +169,6 @@ public class Controller {
         buildViewFromTable(t);
     }
 
-    private void clear() {
-        for (int i = 0; i < table.getItems().size(); i++) {
-            table.getItems().clear();
-        }
-        table.getColumns().clear();
-    }
-
     @FXML
     private void onButtonExecuteQueryClick() {
         clear();
@@ -184,8 +179,11 @@ public class Controller {
             System.out.println(query + " " + f);
             buildViewByCommand(query);
         } else if (query != null && f) {
+            clear();
             System.out.println(query + " " + f);
             SQLQuery.executeQueryNoOutput(query);
+            dbTableBox.getItems().clear();
+            fullFillTableList();
         } else
             executeButton.setDisable(false);
     }
@@ -201,6 +199,37 @@ public class Controller {
     private ObservableList<ObservableList> data;
     private ObservableList<String> row;
     private TableColumn col;
+
+    private void clear() {
+        for (int i = 0; i < table.getItems().size(); i++) {
+            table.getItems().clear();
+        }
+        table.getColumns().clear();
+    }
+
+    private void fullFillTableList() {
+        ObservableList<String> tableList = FXCollections.observableArrayList();
+        Table t = SQLQuery.executeQueryWithOutput(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
+        for (int i = 1; i < t.height; ++i) {
+            tableList.add(t.getCell(i, 0).toString());
+            System.out.println(t.getCell(i, 0).toString());
+        }
+        dbTableBox.setItems(tableList);
+    }
+
+    private void fullFillPredefinedQueryList() {
+        ObservableList<String> queryList = FXCollections.observableArrayList();
+        for (int i = 1; i < 11; i++) {
+            queryList.add("Query " + i);
+        }
+        predefinedQueryBox.setItems(queryList);
+    }
+
+    private void initData() throws SQLException {
+        fullFillTableList();
+        fullFillPredefinedQueryList();
+    }
 
     private void buildViewByCommand(String SQL) {
         buildViewFromTable(SQLQuery.executeQueryWithOutput(SQL));

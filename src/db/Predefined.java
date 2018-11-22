@@ -6,20 +6,19 @@ import main.Table;
 public class Predefined {
 
     // First SELECT query
-    public static Table findCar(String colorNregnum) {
-        colorNregnum = colorNregnum.trim();
-        String[] in = colorNregnum.split("\\s");
-        String color, regnum;
+    public static Table findCar(String colorNregNum) {
+        String[] in = colorNregNum.split(" ");
+        String color, regNum;
         if (in.length >= 2) {
             color = in[0];
-            regnum = in[1];
+            regNum = in[1];
         } else {
             color = "";
-            regnum = "";
+            regNum = "";
         }
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID FROM Cars NATURAL JOIN CarModels WHERE Color = '" + color +
-                        "' AND Reg_number LIKE('%" + regnum + "%');");
+                "SELECT * FROM Cars NATURAL JOIN CarModels WHERE Color = '" + color +
+                        "' AND Reg_number LIKE('%" + regNum + "%');");
     }
 
     // Second SELECT query

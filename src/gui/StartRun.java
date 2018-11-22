@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.Common;
 
@@ -21,6 +20,8 @@ public class StartRun extends Application {
     public void start(Stage primaryStage) throws IOException {
         Common.establishConnection();
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
+        primaryStage.setMinWidth(625);
+        primaryStage.setMinHeight(500);
         primaryStage.setTitle("Self-driving management system ");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

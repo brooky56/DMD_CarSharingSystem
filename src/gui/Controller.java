@@ -19,12 +19,6 @@ import java.sql.SQLException;
 public class Controller {
 
     @FXML
-    public CheckBox updateQueryCheckBox;
-
-    @FXML
-    private HBox CustomFieldHBox;
-
-    @FXML
     private Label predefinedQueryLabel;
 
     @FXML
@@ -67,31 +61,22 @@ public class Controller {
     public TableView<ObservableList> table;
 
     @FXML
-    private void handleTextFieldAction() {
-        if (!queryField.getText().equals("")) {
-            executeButton.setDisable(false);
-        } else {
-            executeButton.setDisable(true);
-        }
-    }
-
-    @FXML
     private void handlePredefinedComboBoxAction() {
         if (!predefinedQueryBox.getValue().equals("")) {
             predefinedResultButton.setDisable(false);
             String numberOfQuery = predefinedQueryBox.getValue();
             switch (numberOfQuery) {
                 case "Query 1":
-                    textAreaForInput.setPromptText("Sample: White AN");
+                    textAreaForInput.setPromptText("Sample input: White AN");
                     break;
                 case "Query 2":
-                    textAreaForInput.setPromptText("Sample: 2017-12-01");
+                    textAreaForInput.setPromptText("Sample input: 2017-12-01");
                     break;
                 case "Query 3":
-                    textAreaForInput.setPromptText("Sample: 2018-01-01");
+                    textAreaForInput.setPromptText("Sample input: 2018-01-01");
                     break;
                 case "Query 4":
-                    textAreaForInput.setPromptText("Sample: 01");
+                    textAreaForInput.setPromptText("Sample input: 01");
                     break;
                 case "Query 5":
                     break;
@@ -107,6 +92,7 @@ public class Controller {
                     break;
             }
         } else {
+            textAreaForInput.setPromptText("Input for the query");
             predefinedResultButton.setDisable(true);
         }
     }
@@ -172,20 +158,13 @@ public class Controller {
     @FXML
     private void onButtonExecuteQueryClick() {
         clear();
-        String query = queryField.getText();
-        boolean f = updateQueryCheckBox.isSelected();
-        System.out.println(f);
-        if (query == null) {
-            executeButton.setDisable(false);
-        } else if (f) {
-            clear();
-            System.out.println(query + " " + f);
-            SQLQuery.executeQueryNoOutput(query);
-            dbTableBox.getItems().clear();
-            fullFillTableList();
-        } else {
-            System.out.println(query + " " + f);
-            buildViewByCommand(query);
+        String query = queryField.getText().toUpperCase();
+        if (query.length() > 7) {
+            if (query.startsWith("SELECT ")) {
+                buildViewByCommand(query);
+            } else if (query.startsWith("INSERT INTO ") || query.startsWith("UPDATE ") || query.startsWith("DELETE ")) {
+                SQLQuery.executeQueryNoOutput(query);
+            }
         }
     }
 

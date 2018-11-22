@@ -18,8 +18,8 @@ public class Predefined {
             regnum = "";
         }
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID FROM Cars NATURAL JOIN CarModels WHERE Color = '" + color +
-                        "' AND Reg_number LIKE('%" + regnum + "%');");
+                "SELECT CarID FROM Cars NATURAL JOIN CarModels WHERE Color LIKE '" + color +
+                        "' AND Reg_number LIKE '%" + regnum + "%';");
     }
 
     // Second SELECT query

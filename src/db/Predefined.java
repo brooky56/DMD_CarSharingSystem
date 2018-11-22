@@ -83,4 +83,11 @@ public class Predefined {
 
         return res;
     }
+
+    // Forth SELECT query
+    public static Table userPayments(String id) {
+        id = id.trim();
+        return SQLQuery.executeQueryWithOutput(
+                "SELECT Sum, DateTime FROM Payments WHERE UserID =  " + id + ";");
+    }
 }

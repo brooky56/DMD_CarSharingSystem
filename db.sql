@@ -180,7 +180,7 @@ CREATE TABLE Repairs
 CREATE TABLE PartsUsed
 (
   RepairID INTEGER not null references Repairs,
-  PartID   INTEGER not null references Parts
+  PartID   INTEGER not null unique references Parts
 );
 
 

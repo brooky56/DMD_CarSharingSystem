@@ -184,106 +184,6 @@ CREATE TABLE PartsUsed
 );
 
 
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (1, 1, 1500);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (1, 3, 1450);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (2, 1, 1200);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (2, 3, 1225);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (3, 2, 600);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (4, 2, 1100);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (5, 5, 105);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (6, 1, 75);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (7, 1, 110);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (7, 3, 105);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (8, 3, 300);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (9, 1, 150);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (10, 1, 135);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (11, 4, 950);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (12, 5, 1050);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (13, 2, 65);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (14, 2, 35);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (15, 2, 210);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (15, 5, 230);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (16, 2, 310);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (17, 3, 875);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (18, 5, 675);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (19, 2, 335);
-INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
-  VALUES (20, 2, 535);
-
-
-
-
-
-
-
-
-INSERT INTO Providers(ProviderID, Name, ContactID)
-  VALUES (1, 'Car Parts Stock', 11);
-INSERT INTO Providers(ProviderID, Name, ContactID)
-  VALUES (2, 'Mini-Center-Berlin', 12);
-INSERT INTO Providers(ProviderID, Name, ContactID)
-  VALUES (3, 'Daimler AG', 13);
-INSERT INTO Providers(ProviderID, Name, ContactID)
-  VALUES (4, 'British Car Center', 14);
-INSERT INTO Providers(ProviderID, Name, ContactID)
-  VALUES (5, 'Biesdorf Auto Center', 15);
-
-
-
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (1, 10, '52.5165847, 13.3141253');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (2, 7,  '52.5165847, 13.3141253');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (3, 5,  '52.5165847, 13.3141253');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (4, 12, '52.5153886, 13.3362814');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (5, 5,  '52.5153886, 13.3362814');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (6, 7,  '52.5153886, 13.3362814');
-INSERT INTO Workshops(WID, NPlaces, GPSloc)
-  VALUES (7, 4,  '52.5153886, 13.3362814');
-
-
-
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (1, 50,  '52.5184755, 13.3865654');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (2, 45,  '52.5174873, 13.3807356');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (3, 30,  '52.5174873, 13.380735');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (4, 20,  '52.5175205, 13.3786468');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (5, 55,  '52.5175205, 13.3786468');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (6, 100, '52.5175205, 13.3786468');
-INSERT INTO Parks(ParkID, NPlaces, GPSloc)
-  VALUES (7, 10,  '52.5176879, 13.3722649');
 
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
   VALUES ('f.braun@gmail.com', '229-11-29', 'Germany', 'Berlin', 'Arkonaplatz', '10115');
@@ -337,7 +237,6 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
   VALUES ('KroosMadrid', 'SuwQesOcT', 'Kross', 'Tony', 10);
 
-
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Volkswagen', 'Golf', 'J1772');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'Mennekes');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Ford', 'Fusion', 'CHAdeMO');
@@ -379,6 +278,14 @@ INSERT INTO Rents VALUES (1, 2, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', 
 INSERT INTO Rents VALUES (3, 1, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (2, 2, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (50,  '52.5184755, 13.3865654');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (45,  '52.5174873, 13.3807356');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (30,  '52.5174873, 13.380735');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (20,  '52.5175205, 13.3786468');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (55,  '52.5175205, 13.3786468');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (100, '52.5175205, 13.3786468');
+INSERT INTO Parks(NPlaces, GPSloc) VALUES (10,  '52.5176879, 13.3722649');
+
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5195766, 13.3892441', 7.5, 'J1772');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5250275, 13.4190273', 5.85, 'Mennekes');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5302688, 13.4184802', 6.05, 'CCS Combo');
@@ -394,25 +301,62 @@ INSERT INTO ChargingHistory VALUES (2, 2, '2017-12-02 09:00:00', '2017-12-02 09:
 INSERT INTO ChargingHistory VALUES (3, 3, '2018-11-02 09:00:00', '2018-12-02 09:30:00', 1000.0);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (3, 2, '2018-11-04 09:00:00');
 
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 10); -- 1500$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 1); -- 1200$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 9); -- 600$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 2); -- 1100$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 8); -- 105$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 3); -- 75$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 7); -- 110$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 4); -- 300$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 6); -- 150$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 5); -- 135$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 5); -- 950$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 6); -- 1050$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 4); -- 65$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 7); -- 35$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 3); -- 210$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 8); -- 310$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 2);  -- 875$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 9);  -- 675$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 1); -- 335$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 10); -- 535$
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (10, '52.5165847, 13.3141253');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (7, '52.5165847, 13.3141253');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (5, '52.5165847, 13.3141253');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (12, '52.5153886, 13.3362814');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (5, '52.5153886, 13.3362814');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (7, '52.5153886, 13.3362814');
+INSERT INTO Workshops(NPlaces, GPSloc) VALUES (4, '52.5153886, 13.3362814');
 
-VACUUM;
+INSERT INTO Providers(Name, ContactID) VALUES ('Car Parts Stock', 11);
+INSERT INTO Providers(Name, ContactID) VALUES ('Mini-Center-Berlin', 12);
+INSERT INTO Providers(Name, ContactID) VALUES ('Daimler AG', 13);
+INSERT INTO Providers(Name, ContactID) VALUES ('British Car Center', 14);
+INSERT INTO Providers(Name, ContactID) VALUES ('Biesdorf Auto Center', 15);
+
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 10);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 1);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 9);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 2);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 8);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 3);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 7);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 4);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 6);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 5);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 5);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 6);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 4);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 7);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 3);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 8);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 2);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 9);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 1);
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 10);
+
+INSERT INTO CurrentCostOfPartTypes VALUES (1, 1, 1500);
+INSERT INTO CurrentCostOfPartTypes VALUES (1, 3, 1450);
+INSERT INTO CurrentCostOfPartTypes VALUES (2, 1, 1200);
+INSERT INTO CurrentCostOfPartTypes VALUES (2, 3, 1225);
+INSERT INTO CurrentCostOfPartTypes VALUES (3, 2, 600);
+INSERT INTO CurrentCostOfPartTypes VALUES (4, 2, 1100);
+INSERT INTO CurrentCostOfPartTypes VALUES (5, 5, 105);
+INSERT INTO CurrentCostOfPartTypes VALUES (6, 1, 75);
+INSERT INTO CurrentCostOfPartTypes VALUES (7, 1, 110);
+INSERT INTO CurrentCostOfPartTypes VALUES (7, 3, 105);
+INSERT INTO CurrentCostOfPartTypes VALUES (8, 3, 300);
+INSERT INTO CurrentCostOfPartTypes VALUES (9, 1, 150);
+INSERT INTO CurrentCostOfPartTypes VALUES (10, 1, 135);
+INSERT INTO CurrentCostOfPartTypes VALUES (11, 4, 950);
+INSERT INTO CurrentCostOfPartTypes VALUES (12, 5, 1050);
+INSERT INTO CurrentCostOfPartTypes VALUES (13, 2, 65);
+INSERT INTO CurrentCostOfPartTypes VALUES (14, 2, 35);
+INSERT INTO CurrentCostOfPartTypes VALUES (15, 2, 210);
+INSERT INTO CurrentCostOfPartTypes VALUES (15, 5, 230);
+INSERT INTO CurrentCostOfPartTypes VALUES (16, 2, 310);
+INSERT INTO CurrentCostOfPartTypes VALUES (17, 3, 875);
+INSERT INTO CurrentCostOfPartTypes VALUES (18, 5, 675);
+INSERT INTO CurrentCostOfPartTypes VALUES (19, 2, 335);
+INSERT INTO CurrentCostOfPartTypes VALUES (20, 2, 535);

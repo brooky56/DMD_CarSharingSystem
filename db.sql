@@ -206,13 +206,35 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 
 INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111111', 'Volkswagen', 'Golf', 'Blue');
 INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111112', 'Mercedes', 'Benz', 'White');
-INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Ford', 'Galaxy', 'Black');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Ford', 'Fusion', 'Grey');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Mercedes', 'SLA', 'Black');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'KIA', 'Spectre', 'Red');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Honda', 'Pilot', 'Silver');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Chevrolet', 'Aveo', 'Pink');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'BMW', 'M5', 'White');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Mitsubishi', 'Lancer', 'Yellow');
+INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Ford', 'Mustang', 'Black');
 
 INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'AN102030');
 INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'AN122131');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'BN000000');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'EU201809');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'RU202020');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'BN105020');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'EU201809');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'RU202020');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (4, 'UA578126');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'FR738032');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (4, 'LT528791');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (5, 'PL180472');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (6, 'LT521270');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (5, 'UA775685');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (6, 'KZ251178');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (7, 'KZ470883');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (8, 'ES287132');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (7, 'AU697266');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (8, 'SW475863');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (9, 'UK757311');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (10, 'AN531472');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (9, 'RU326657');
+INSERT INTO Cars (ModelID, Reg_number) VALUES (10, 'RU663313');
 
 
 

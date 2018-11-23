@@ -120,7 +120,7 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: 2017-12-01");
                     break;
                 case "Query 3":
-                    textAreaForInput.setPromptText("Sample input: 2018-01-01");
+                    textAreaForInput.setPromptText("No input required");
                     break;
                 case "Query 4":
                     textAreaForInput.setPromptText("Sample input: 01");
@@ -129,6 +129,7 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: 2018-01-01");
                     break;
                 case "Query 6":
+                    textAreaForInput.setPromptText("No input required");
                     break;
                 case "Query 7":
                     break;
@@ -156,7 +157,7 @@ public class Controller {
                 t = Predefined.socketsPerHour(input);
                 break;
             case "Query 3":
-                t = Predefined.busyPerPeriod(input);
+                t = Predefined.busyPerPeriod();
                 break;
             case "Query 4":
                 t = Predefined.userPayments(input);
@@ -165,7 +166,7 @@ public class Controller {
                 t = Predefined.rentStatistics(input);
                 break;
             case "Query 6":
-                //t = Predefined.socketsPerHour(input);
+                t = Predefined.popularPlaces();
                 break;
             case "Query 7":
                 //t = Predefined.socketsPerHour(input);

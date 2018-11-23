@@ -53,11 +53,11 @@ CREATE TABLE Payments
 CREATE TABLE CarModels
 (
   ModelID       INTEGER not null primary key autoincrement,
-  VIN           TEXT    not null unique check(LENGTH(VIN) = 17),
   Brand         TEXT    not null check(LENGTH(Brand) > 0),
   Name          TEXT    not null check(LENGTH(Name) > 0),
   Color         TEXT    not null check(LENGTH(Color) > 0),
-  SocketShape   TEXT    not null check(LENGTH(SocketShape) > 0)
+  SocketShape   TEXT    not null check(LENGTH(SocketShape) > 0),
+  unique (Brand, Name, Color)
 );
 
 CREATE TABLE Cars
@@ -204,9 +204,9 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 
 
 
-INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111111', 'Volkswagen', 'Golf', 'Blue');
-INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111112', 'Mercedes', 'Benz', 'White');
-INSERT INTO CarModels (VIN, Brand, Name, Color) VALUES ('11111111111111113', 'Ford', 'Galaxy', 'Black');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Volkswagen', 'Golf', 'Blue', 'Basic');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes', 'Benz', 'White', 'Basic');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Galaxy', 'Black', 'Basic');
 
 INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'AN102030');
 INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'AN122131');

@@ -183,6 +183,28 @@ CREATE TABLE PartsUsed
   PartID   INTEGER not null references Parts
 );
 
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (1,'Left door',10); --1500$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (2,'Bumper',9); --600$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (3,'Right Mirror',8); --85$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (4,'Grilles',7); --110$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (5,'Left tail light',6); --150$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (6,'Right fender',5); --1050$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (7,'Right door handle',4); --35$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (8,'Headlights',3); --210$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (9,'Hood',2);  --875$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+  VALUES (10,'Nose panel',1); --435$
+
+
 
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
   VALUES ('some1@gmail.com', '44-44-44', 'Germany', 'Berlin', 'Main', '000000');
@@ -250,9 +272,9 @@ INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', 
 INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 
 
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'Basic');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (15, '40, 50', 10.5, 'Basic');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'Basic');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'J1772');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (15, '40, 50', 10.5, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'CCS Combo');
 
 INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
 INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);

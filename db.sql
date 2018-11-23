@@ -244,13 +244,13 @@ INSERT INTO Rents VALUES (1, 2, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', 
 INSERT INTO Rents VALUES (3, 1, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (2, 2, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5329390, 13.3803126,21', 7.5, 'J1772');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5099294, 13.3461091,21', 5.85, 'Mennekes');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5039276, 13.3801994,20', 6.05, 'CCS Combo');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5196189, 13.389178,21', 5.65, 'GB/T');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (12, '52.5247511, 13.4168274,18.11', 8.0, 'CHAdeMO');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5280258, 13.4159384,20.66', 5.55, 'Mennekes');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5302778, 13.4182285,21', 6.95, 'CSS Combo');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5195766, 13.3892441', 7.5, 'J1772');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5250275, 13.4190273', 5.85, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5302688, 13.4184802', 6.05, 'CCS Combo');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5195766, 13.3892441', 5.65, 'GB/T');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (12, '52.5214633, 13.3882999', 8.0, 'CHAdeMO');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5038338, 13.3803928', 5.55, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.51024, 13.3754039', 6.95, 'CSS Combo');
 
 INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
 INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);

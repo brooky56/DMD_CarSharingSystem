@@ -205,16 +205,16 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 
 
 
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Volkswagen', 'Golf', 'Blue');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes', 'Benz', 'White');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Fusion', 'Grey');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes', 'SLA', 'Black');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('KIA', 'Spectre', 'Red');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Honda', 'Pilot', 'Silver');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Chevrolet', 'Aveo', 'Pink');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('BMW', 'M5', 'White');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mitsubishi', 'Lancer', 'Yellow');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Mustang', 'Black');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Volkswagen', 'Golf', 'Blue','J1772');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'White','Mennekes');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Fusion', 'Grey','CHAdeMO');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes Benz', 'SLA', 'Black','Mennekes');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('KIA', 'Spectre', 'Red','GB/T');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Honda', 'Pilot', 'Silver','CCS Combo');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Chevrolet', 'Aveo', 'Pink','GB/T');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('BMW', 'M5', 'White','J1772');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Honda', 'Insight', 'Black','CCS Combo');
+INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Mustang', 'Black','CHAdeMO');
 
 
 
@@ -254,6 +254,8 @@ INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', 
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'J1772');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (15, '40, 50', 10.5, 'Mennekes');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'CCS Combo');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'GB/T');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'CHAdeMO');
 
 INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
 INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);

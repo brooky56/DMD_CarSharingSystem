@@ -184,24 +184,159 @@ CREATE TABLE PartsUsed
 );
 
 
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (1, 1, 1500);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (1, 3, 1450);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (2, 1, 1200);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (2, 3, 1225);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (3, 2, 600);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (4, 2, 1100);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (5, 5, 105);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (6, 1, 75);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (7, 1, 110);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (7, 3, 105);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (8, 3, 300);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (9, 1, 150);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (10, 1, 135);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (11, 4, 950);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (12, 5, 1050);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (13, 2, 65);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (14, 2, 35);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (15, 2, 210);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (15, 5, 230);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (16, 2, 310);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (17, 3, 875);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (18, 5, 675);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (19, 2, 335);
+INSERT INTO CurrentCostOfPartTypes(PartTypeID, ProviderID, Cost)
+  VALUES (20, 2, 535);
+
+
+
+
+
+
+
+
+INSERT INTO Providers(ProviderID, Name, ContactID)
+  VALUES (1, 'Car Parts Stock', 11);
+INSERT INTO Providers(ProviderID, Name, ContactID)
+  VALUES (2, 'Mini-Center-Berlin', 12);
+INSERT INTO Providers(ProviderID, Name, ContactID)
+  VALUES (3, 'Daimler AG', 13);
+INSERT INTO Providers(ProviderID, Name, ContactID)
+  VALUES (4, 'British Car Center', 14);
+INSERT INTO Providers(ProviderID, Name, ContactID)
+  VALUES (5, 'Biesdorf Auto Center', 15);
+
+
+
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (1, 10, '52.5165847, 13.3141253');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (2, 7,  '52.5165847, 13.3141253');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (3, 5,  '52.5165847, 13.3141253');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (4, 12, '52.5153886, 13.3362814');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (5, 5,  '52.5153886, 13.3362814');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (6, 7,  '52.5153886, 13.3362814');
+INSERT INTO Workshops(WID, NPlaces, GPSloc)
+  VALUES (7, 4,  '52.5153886, 13.3362814');
+
+
+
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (1, 50,  '52.5184755, 13.3865654');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (2, 45,  '52.5174873, 13.3807356');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (3, 30,  '52.5174873, 13.380735');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (4, 20,  '52.5175205, 13.3786468');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (5, 55,  '52.5175205, 13.3786468');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (6, 100, '52.5175205, 13.3786468');
+INSERT INTO Parks(ParkID, NPlaces, GPSloc)
+  VALUES (7, 10,  '52.5176879, 13.3722649');
 
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
-  VALUES ('some1@gmail.com', '44-44-44', 'Germany', 'Berlin', 'Main', '000000');
+  VALUES ('f.braun@gmail.com', '229-11-29', 'Germany', 'Berlin', 'Arkonaplatz', '10115');
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
-  VALUES ('some2@gmail.com', '44-44-45', 'Germany', 'Berlin', 'Main', '000000');
+  VALUES ('s.klein@gmail.com', '318-23-17', 'Germany', 'Berlin', 'Linienstrasse', '10178');
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
-  VALUES ('some3@gmail.com', '44-44-46', 'Germany', 'Berlin', 'Main', '000000');
+  VALUES ('a.schwartz@gmail.com', '229-23-46', 'Germany', 'Berlin', 'Zionskirchstrasse', '10365');
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
-  VALUES ('some4@gmail.com', '44-44-47', 'Germany', 'Berlin', 'Main', '000000');
+  VALUES ('s.walter@gmail.com', '318-22-59', 'Germany', 'Berlin', 'Oranienstrasse', '10407');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('p.becker@gmail.com', '228-45-69', 'Germany', 'Berlin', 'Danziger Strasse', '10435');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('o.koch@gmail.com', '234-67-19', 'Germany', 'Berlin', 'Oranienstrasse', '10551');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('s.ballack@gmail.com', '219-76-89', 'Germany', 'Berlin', 'Chausseestrasse', '10555');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('m.nouer@gmail.com', '276-87-99', 'Germany', 'Berlin', 'Karl-Marx-Allee', '10319');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('m.roues@gmail.com', '285-90-34', 'Germany', 'Berlin', 'Choriner Strasse', '10435');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('t.kross@gmail.com', '234-34-56', 'Germany', 'Berlin', 'Skalitzer Strasse', '10317');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('t.muler@gmail.com', '231-35-12', 'Germany', 'Berlin', 'Legiendamm', '10367');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('o.khan@gmail.com', '278-16-65', 'Germany', 'Berlin', 'Majakowskiring', '10614');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('c.bouteng@gmail.com', '201-04-56', 'Germany', 'Berlin', 'Kaiserdamm', '10717');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('l.sane@gmail.com', '233-85-73', 'Germany', 'Berlin', 'Turmstrave', '10415');
+INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
+  VALUES ('a.beckenbauer@gmail.com', '276-10-56', 'Germany', 'Berlin', 'Leuschnerdamm', '10321');
 
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
-  VALUES ('Vladic30', '1234567', 'Vlad', 'Ivanov', 1);
+  VALUES ('Vlad30', '1234567', 'Braun', 'Fridrih', 1);
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
-  VALUES ('CrazyIvan', 'BpbLeaaehs', 'Ivan', 'Konyukhov', 2);
+  VALUES ('CrazyIvan', 'BpbLeaaehs', 'Klein', 'Sem', 2);
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
-  VALUES ('EiffelTOP', 'Vtqth<thn', 'Bertran', 'Meyer', 3);
+  VALUES ('EiffelTOP', 'Vtqth<thn', 'Walter', 'Scott', 3);
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
-  VALUES ('DROPPER', 'CexxbUexxb', 'Giancarlo', 'Succi', 4);
+  VALUES ('ForzaJuve', 'CexxbUexxb', 'Becker', 'Paulo', 4);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+  VALUES ('Bavaria', 'bkGofQBZ5', 'Becker', 'Paula', 5);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+  VALUES ('KochanO', 'PdgJEcfQs', 'Koch', 'Oliver', 6);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+  VALUES ('Ballack13', 'W6zcpnFRW', 'Ballack', 'Samuel', 7);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+    VALUES ('NouerNumberOne', 'TfQVx8XFw', 'Nouer', 'Manuel', 8);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+  VALUES ('Marko13', 'rpbfO0s4D', 'Roues', 'Marko', 9);
+INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
+  VALUES ('KroosMadrid', 'SuwQesOcT', 'Kross', 'Tony', 10);
+
 
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Volkswagen', 'Golf', 'J1772');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'Mennekes');

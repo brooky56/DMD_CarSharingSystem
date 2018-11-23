@@ -244,11 +244,13 @@ INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', 
 INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '50, 40', 10.5, 'J1772');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '40, 50', 10.5, 'Mennekes');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'CCS Combo');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'GB/T');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'CHAdeMO');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5329390, 13.3803126,21', 7.5, 'J1772');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5099294, 13.3461091,21', 5.85, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5039276, 13.3801994,20', 6.05, 'CCS Combo');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5196189, 13.389178,21', 5.65, 'GB/T');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (12, '52.5247511, 13.4168274,18.11', 8.0, 'CHAdeMO');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5280258, 13.4159384,20.66', 5.55, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5302778, 13.4182285,21', 6.95, 'CSS Combo');
 
 INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
 INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);
@@ -258,14 +260,24 @@ INSERT INTO ChargingHistory VALUES (3, 3, '2018-11-02 09:00:00', '2018-12-02 09:
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (3, 2, '2018-11-04 09:00:00');
 
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 10); -- 1500$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 1); -- 1200$
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 9); -- 600$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 8); -- 85$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 2); -- 1100$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 8); -- 105$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 3); -- 75$
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 7); -- 110$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 4); -- 300$
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 6); -- 150$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 5); -- 1050$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 4); -- 35$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 5); -- 135$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 5); -- 950$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 6); -- 1050$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 4); -- 65$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 7); -- 35$
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 3); -- 210$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 8); -- 310$
 INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 2);  -- 875$
-INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 1); -- 435$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 9);  -- 675$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 1); -- 335$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 10); -- 535$
 
 VACUUM;

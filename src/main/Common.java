@@ -1,7 +1,6 @@
 package main;
 
 import db.ConnectionToSQL;
-import db.Predefined;
 
 import java.sql.Connection;
 
@@ -52,14 +51,5 @@ public class Common {
                 + square(Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dlon)));
         double x = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lat2);
         return 6371.302 * Math.atan2(y, x);
-    }
-
-    public static void main(String[] args) {
-        establishConnection();
-//        Table t = Predefined.findCar("White AN");
-//        Table t = Predefined.socketsPerHour("2017-12-01");
-//        Table t = Predefined.busyPerPeriod("2017-01-04");
-        Table t = Predefined.rentStatistics("2017-01-01");
-        System.out.println(t.toString());
     }
 }

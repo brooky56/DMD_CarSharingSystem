@@ -55,7 +55,6 @@ CREATE TABLE CarModels
   ModelID       INTEGER not null primary key autoincrement,
   Brand         TEXT    not null check(LENGTH(Brand) > 0),
   Name          TEXT    not null check(LENGTH(Name) > 0),
-  Color         TEXT    not null check(LENGTH(Color) > 0),
   SocketShape   TEXT    not null check(LENGTH(SocketShape) > 0),
   unique (Brand, Name, Color)
 );
@@ -64,7 +63,8 @@ CREATE TABLE Cars
 (
   CarID      INTEGER not null primary key autoincrement,
   ModelID    INTEGER not null references CarModels,
-  Reg_number TEXT    not null unique check(LENGTH(Reg_number) > 0)
+  Reg_number TEXT    not null unique check(LENGTH(Reg_number, Color) > 0),
+  Color      TEXT    not null check(LENGTH(Color) > 0)
 );
 
 CREATE TABLE AvailableCars
@@ -203,43 +203,37 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
   VALUES ('DROPPER', 'CexxbUexxb', 'Giancarlo', 'Succi', 4);
 
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Volkswagen', 'Golf', 'J1772');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'Mennekes');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Ford', 'Fusion', 'CHAdeMO');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'SLA', 'Mennekes');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('KIA', 'Spectre', 'GB/T');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Honda', 'Pilot', 'CCS Combo');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Chevrolet', 'Aveo', 'GB/T');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('BMW', 'M5', 'J1772');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Honda', 'Insight', 'CCS Combo');
+INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Ford', 'Mustang', 'CHAdeMO');
 
-
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Volkswagen', 'Golf', 'Blue','J1772');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'White','Mennekes');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Fusion', 'Grey','CHAdeMO');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Mercedes Benz', 'SLA', 'Black','Mennekes');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('KIA', 'Spectre', 'Red','GB/T');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Honda', 'Pilot', 'Silver','CCS Combo');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Chevrolet', 'Aveo', 'Pink','GB/T');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('BMW', 'M5', 'White','J1772');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Honda', 'Insight', 'Black','CCS Combo');
-INSERT INTO CarModels (Brand, Name, Color, SocketShape) VALUES ('Ford', 'Mustang', 'Black','CHAdeMO');
-
-
-
-INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'AN102030');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'AN122131');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'BN105020');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (2, 'EU201809');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'RU202020');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (4, 'UA578126');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (3, 'FR738032');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (4, 'LT528791');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (5, 'PL180472');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (6, 'LT521270');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (5, 'UA775685');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (6, 'KZ251178');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (7, 'KZ470883');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (8, 'ES287132');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (7, 'AU697266');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (8, 'SW475863');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (9, 'UK757311');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (10, 'AN531472');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (9, 'RU326657');
-INSERT INTO Cars (ModelID, Reg_number) VALUES (10, 'RU663313');
-
-
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (1, 'AN102030', 'Blue');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (2, 'AN122131', 'White');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (1, 'BN105020', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (2, 'EU201809', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (3, 'RU202020', 'Grey');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (4, 'UA578126', 'Black');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (3, 'FR738032', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (4, 'LT528791', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (5, 'PL180472', 'Red');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (6, 'LT521270', 'Silver');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (5, 'UA775685', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (6, 'KZ251178', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (7, 'KZ470883', 'Pink');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (8, 'ES287132', 'White');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (7, 'AU697266', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (8, 'SW475863', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'UK757311', 'Black');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'AN531472', 'Black');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'RU326657', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'RU663313', '');
 
 INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
@@ -250,12 +244,11 @@ INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', 
 INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 
-
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'J1772');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (15, '40, 50', 10.5, 'Mennekes');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'CCS Combo');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'GB/T');
-INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '60, 60', 10.5, 'CHAdeMO');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '50, 40', 10.5, 'J1772');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '40, 50', 10.5, 'Mennekes');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'CCS Combo');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'GB/T');
+INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '60, 60', 10.5, 'CHAdeMO');
 
 INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
 INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);
@@ -264,25 +257,15 @@ INSERT INTO ChargingHistory VALUES (2, 2, '2017-12-02 09:00:00', '2017-12-02 09:
 INSERT INTO ChargingHistory VALUES (3, 3, '2018-11-02 09:00:00', '2018-12-02 09:30:00', 1000.0);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (3, 2, '2018-11-04 09:00:00');
 
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (1,'Left door',10); --1500$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (2,'Bumper',9); --600$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (3,'Right Mirror',8); --85$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (4,'Grilles',7); --110$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (5,'Left tail light',6); --150$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (6,'Right fender',5); --1050$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (7,'Right door handle',4); --35$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (8,'Headlights',3); --210$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (9,'Hood',2);  --875$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-VALUES (10,'Nose panel',1); --435$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left door', 10); -- 1500$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Bumper', 9); -- 600$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right Mirror', 8); -- 85$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Grilles', 7); -- 110$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Left tail light', 6); -- 150$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right fender', 5); -- 1050$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Right door handle', 4); -- 35$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Headlights', 3); -- 210$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Hood', 2);  -- 875$
+INSERT INTO PartTypes (Name, ModelID) VALUES ('Nose panel', 1); -- 435$
 
 VACUUM;

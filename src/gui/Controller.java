@@ -61,9 +61,56 @@ public class Controller {
     public TableView<ObservableList> table;
 
     @FXML
+    private void initialize() {
+        // Data
+        fullFillPredefinedQueryList();
+        fullFillTableList();
+        // Other
+        table.setEditable(false);
+        buttonShowTable.setDisable(true);
+        predefinedResultButton.setDisable(true);
+    }
+
+    private void fullFillPredefinedQueryList() {
+        ObservableList<String> queryList = FXCollections.observableArrayList();
+        for (int i = 1; i < 11; i++) {
+            queryList.add("Query " + i);
+        }
+        predefinedQueryBox.setItems(queryList);
+    }
+
+    private void fullFillTableList() {
+        ObservableList<String> tableList = FXCollections.observableArrayList();
+        Table t = SQLQuery.executeQueryWithOutput(
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
+        for (int i = 1; i < t.height; ++i) {
+            tableList.add(t.getCell(i, 0).toString());
+            System.out.println(t.getCell(i, 0).toString());
+        }
+        dbTableBox.setItems(tableList);
+    }
+
+    @FXML
+    private void onButtonExecuteQueryClick() {
+        clear();
+        String query = queryField.getText().toUpperCase();
+        if (query.length() > 7) {
+            if (query.startsWith("SELECT ")) {
+                buildViewByCommand(query);
+            } else if (query.startsWith("INSERT INTO ") || query.startsWith("UPDATE ") || query.startsWith("DELETE ")) {
+                SQLQuery.executeQueryNoOutput(query);
+            }
+        }
+    }
+
+    @FXML
     private void handlePredefinedComboBoxAction() {
-        if (!predefinedQueryBox.getValue().equals("")) {
+        if (predefinedQueryBox.getValue().isEmpty()) {
+            textAreaForInput.setPromptText("Input for the query");
+            predefinedResultButton.setDisable(true);
+        } else {
             predefinedResultButton.setDisable(false);
+            textAreaForInput.clear();
             String numberOfQuery = predefinedQueryBox.getValue();
             switch (numberOfQuery) {
                 case "Query 1":
@@ -92,34 +139,14 @@ public class Controller {
                 case "Query 10":
                     break;
             }
-        } else {
-            textAreaForInput.setPromptText("Input for the query");
-            predefinedResultButton.setDisable(true);
         }
-    }
-
-    @FXML
-    private void handleComboBoxAction() {
-        if (!dbTableBox.getValue().equals("")) {
-            buttonShowTable.setDisable(false);
-        } else {
-            buttonShowTable.setDisable(true);
-        }
-    }
-
-    @FXML
-    private void onButtonShowClick() {
-        clear();
-        String tableNeeded = dbTableBox.getValue();
-        String selectQuery = "SELECT * FROM " + tableNeeded;
-        buildViewByCommand(selectQuery);
     }
 
     @FXML
     private void onButtonShowQueryResultClick() {
         clear();
         String numberOfQuery = predefinedQueryBox.getValue();
-        String input = textAreaForInput.getText();
+        String input = textAreaForInput.getText().trim();
         Table t = null;
         switch (numberOfQuery) {
             case "Query 1":
@@ -157,24 +184,20 @@ public class Controller {
     }
 
     @FXML
-    private void onButtonExecuteQueryClick() {
-        clear();
-        String query = queryField.getText().toUpperCase();
-        if (query.length() > 7) {
-            if (query.startsWith("SELECT ")) {
-                buildViewByCommand(query);
-            } else if (query.startsWith("INSERT INTO ") || query.startsWith("UPDATE ") || query.startsWith("DELETE ")) {
-                SQLQuery.executeQueryNoOutput(query);
-            }
+    private void handleComboBoxAction() {
+        if (dbTableBox.getValue().isEmpty()) {
+            buttonShowTable.setDisable(true);
+        } else {
+            buttonShowTable.setDisable(false);
         }
     }
 
     @FXML
-    private void initialize() {
-        initData();
-        table.setEditable(false);
-        buttonShowTable.setDisable(true);
-        predefinedResultButton.setDisable(true);
+    private void onButtonShowClick() {
+        clear();
+        String tableNeeded = dbTableBox.getValue();
+        String selectQuery = "SELECT * FROM " + tableNeeded;
+        buildViewByCommand(selectQuery);
     }
 
     private void clear() {
@@ -182,30 +205,6 @@ public class Controller {
             table.getItems().clear();
         }
         table.getColumns().clear();
-    }
-
-    private void fullFillTableList() {
-        ObservableList<String> tableList = FXCollections.observableArrayList();
-        Table t = SQLQuery.executeQueryWithOutput(
-                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
-        for (int i = 1; i < t.height; ++i) {
-            tableList.add(t.getCell(i, 0).toString());
-            System.out.println(t.getCell(i, 0).toString());
-        }
-        dbTableBox.setItems(tableList);
-    }
-
-    private void fullFillPredefinedQueryList() {
-        ObservableList<String> queryList = FXCollections.observableArrayList();
-        for (int i = 1; i < 11; i++) {
-            queryList.add("Query " + i);
-        }
-        predefinedQueryBox.setItems(queryList);
-    }
-
-    private void initData() {
-        fullFillTableList();
-        fullFillPredefinedQueryList();
     }
 
     private void buildViewByCommand(String SQL) {

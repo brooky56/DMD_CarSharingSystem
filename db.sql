@@ -46,8 +46,8 @@ CREATE TABLE Customers
 CREATE TABLE Payments
 (
   UserID   INTEGER  not null references Customers,
-  Sum      REAL     not null check(Sum > 0.0),
-  DateTime DATETIME not null check(DateTime LIKE '____-__-__ __:__:__%')
+  Paid      REAL     not null check(Paid > 0.0),
+  DateTime DATETIME not null check(DateTime LIKE '____-__-__ __:__:__.%')
 );
 
 CREATE TABLE CarModels
@@ -78,11 +78,11 @@ CREATE TABLE Rents
 (
   CarID          INTEGER  not null references Cars,
   UserID         INTEGER  not null references Customers,
-  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__:__%'),
+  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__'),
   GPSloc_start   TEXT     not null check(GPSloc_start LIKE '_%, _%'),
-  DateTime_end   DATETIME not null check(DateTime_end LIKE '____-__-__ __:__:__%'),
+  DateTime_end   DATETIME not null check(DateTime_end LIKE '____-__-__ __:__'),
   GPSloc_end     TEXT     not null check(GPSloc_end LIKE '_%, _%'),
-  Paid           REAL     not null check(Paid >= 0.0),
+  Cost           REAL     not null check(Cost >= 0.0),
   DistanceKM     REAL     not null check(DistanceKM > 0.0)
 );
 
@@ -97,8 +97,8 @@ CREATE TABLE ParkingHistory
 (
   ParkID          INTEGER  not null references Parks,
   CarID           INTEGER  not null references Cars,
-  DateTime_arrive DATETIME not null check(DateTime_arrive LIKE '____-__-__ __:__:__%'),
-  DateTime_leave  DATETIME not null default 'now' check(DateTime_leave = 'now' OR DateTime_leave LIKE '____-__-__ __:__:__%')
+  DateTime_arrive DATETIME not null check(DateTime_arrive LIKE '____-__-__ __:__'),
+  DateTime_leave  DATETIME not null default 'now' check(DateTime_leave = 'now' OR DateTime_leave LIKE '____-__-__ __:__')
 );
 
 CREATE TABLE ChargingStations
@@ -114,9 +114,9 @@ CREATE TABLE ChargingHistory
 (
   UID            INTEGER  not null references ChargingStations,
   CarID          INTEGER  not null references Cars,
-  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__:__%'),
-  DateTime_end   DATETIME not null default 'now' check(DateTime_end = 'now' OR DateTime_end LIKE '____-__-__ __:__:__%'),
-  Paid           REAL     not null default 'now' check(Paid = 'now' OR Paid > 0.0)
+  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__:__'),
+  DateTime_end   DATETIME not null default 'now' check(DateTime_end = 'now' OR DateTime_end LIKE '____-__-__ __:__:__'),
+  Cost           REAL     not null default 'now' check(Cost = 'now' OR Cost > 0.0)
 );
 
 CREATE TABLE Workshops
@@ -169,11 +169,11 @@ CREATE TABLE CurrentAmountOfParts
 
 CREATE TABLE Repairs
 (
-  RepairID       INTEGER  not null primary key autoincrement,
-  WID            INTEGER  not null references Workshops,
-  CarID          INTEGER  not null references Cars,
-  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__:__%'),
-  DateTime_end   DATETIME not null default 'now' check(DateTime_end = 'now' OR DateTime_end LIKE '____-__-__ __:__:__%')
+  RepairID   INTEGER  not null primary key autoincrement,
+  WID        INTEGER  not null references Workshops,
+  CarID      INTEGER  not null references Cars,
+  Date_start DATE     not null check(Date_start LIKE '____-__-__'),
+  Date_end   DATE     not null default 'now' check(Date_end = 'now' OR Date_end LIKE '____-__-__')
 );
 
 CREATE TABLE PartsUsed
@@ -215,14 +215,14 @@ INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'RU202020');
 
 
 
-INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 3, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (3, 4, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (2, 1, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 3, '2017-01-01 08:00', '10, 10', '2017-01-01 09:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (3, 4, '2017-01-01 08:00', '10, 10', '2017-01-01 09:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (2, 1, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
 
 
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'Basic');

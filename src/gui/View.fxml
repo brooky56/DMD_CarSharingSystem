@@ -18,7 +18,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="queryField" prefHeight="100.0" prefWidth="209.0" promptText="Put your query" />
+            <TextArea fx:id="queryField" prefHeight="100.0" prefWidth="209.0" promptText="Write your query" />
             <Button fx:id="executeButton" mnemonicParsing="false" onAction="#onButtonExecuteQueryClick" prefHeight="25.0" prefWidth="209.0" text="Execute query" maxWidth="Infinity"/>
          </children>
       </VBox>

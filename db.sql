@@ -216,24 +216,24 @@ INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Ford', 'Mustang', 'CHA
 
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (1, 'AN102030', 'Blue');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (2, 'AN122131', 'White');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (1, 'BN105020', '');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (2, 'EU201809', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (1, 'BN105020', 'Red');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (2, 'EU201809', 'Silver');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (3, 'RU202020', 'Grey');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (4, 'UA578126', 'Black');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (3, 'FR738032', '');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (4, 'LT528791', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (3, 'FR738032', 'Blue');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (4, 'LT528791', 'White');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (5, 'PL180472', 'Red');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (6, 'LT521270', 'Silver');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (5, 'UA775685', '');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (6, 'KZ251178', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (5, 'UA775685', 'Green');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (6, 'KZ251178', 'Yellow');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (7, 'KZ470883', 'Pink');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (8, 'ES287132', 'White');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (7, 'AU697266', '');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (8, 'SW475863', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (7, 'AU697266', 'White');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (8, 'SW475863', 'Green');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'UK757311', 'Black');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'AN531472', 'Black');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'RU326657', '');
-INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'RU663313', '');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'RU326657', 'Brown');
+INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'RU663313', 'Beige');
 
 INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);

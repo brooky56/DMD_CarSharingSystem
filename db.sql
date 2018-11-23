@@ -183,27 +183,6 @@ CREATE TABLE PartsUsed
   PartID   INTEGER not null references Parts
 );
 
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (1,'Left door',10); --1500$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (2,'Bumper',9); --600$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (3,'Right Mirror',8); --85$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (4,'Grilles',7); --110$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (5,'Left tail light',6); --150$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (6,'Right fender',5); --1050$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (7,'Right door handle',4); --35$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (8,'Headlights',3); --210$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (9,'Hood',2);  --875$
-INSERT INTO PartTypes (PartTypeID, Name, ModelID)
-  VALUES (10,'Nose panel',1); --435$
-
 
 
 INSERT INTO Contacts (Email, Phone, Country, City, Street, ZIP_code)
@@ -282,5 +261,26 @@ INSERT INTO ChargingHistory VALUES (2, 1, '2017-12-01 20:00:00', '2017-12-01 20:
 INSERT INTO ChargingHistory VALUES (2, 2, '2017-12-02 09:00:00', '2017-12-02 09:45:00', 50.0);
 INSERT INTO ChargingHistory VALUES (3, 3, '2018-11-02 09:00:00', '2018-12-02 09:30:00', 1000.0);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (3, 2, '2018-11-04 09:00:00');
+
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (1,'Left door',10); --1500$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (2,'Bumper',9); --600$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (3,'Right Mirror',8); --85$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (4,'Grilles',7); --110$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (5,'Left tail light',6); --150$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (6,'Right fender',5); --1050$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (7,'Right door handle',4); --35$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (8,'Headlights',3); --210$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (9,'Hood',2);  --875$
+INSERT INTO PartTypes (PartTypeID, Name, ModelID)
+VALUES (10,'Nose panel',1); --435$
 
 VACUUM;

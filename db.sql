@@ -56,14 +56,14 @@ CREATE TABLE CarModels
   Brand         TEXT    not null check(LENGTH(Brand) > 0),
   Name          TEXT    not null check(LENGTH(Name) > 0),
   SocketShape   TEXT    not null check(LENGTH(SocketShape) > 0),
-  unique (Brand, Name, Color)
+  unique (Brand, Name)
 );
 
 CREATE TABLE Cars
 (
   CarID      INTEGER not null primary key autoincrement,
   ModelID    INTEGER not null references CarModels,
-  Reg_number TEXT    not null unique check(LENGTH(Reg_number, Color) > 0),
+  Reg_number TEXT    not null unique check(LENGTH(Reg_number) > 0),
   Color      TEXT    not null check(LENGTH(Color) > 0)
 );
 
@@ -235,14 +235,14 @@ INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'AN531472', 'Black');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'RU326657', 'Brown');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'RU663313', 'Beige');
 
-INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00', '0, 0', '2017-01-01 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 3, '2017-01-01 08:00', '10, 10', '2017-01-01 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (3, 4, '2017-01-01 08:00', '10, 10', '2017-01-01 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (2, 1, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00', '0, 0', '2017-01-01 13:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00', '0, 0', '2017-01-01 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 1, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 2, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 3, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (3, 4, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (2, 1, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 2, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 1, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 2, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '50, 40', 10.5, 'J1772');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '40, 50', 10.5, 'Mennekes');

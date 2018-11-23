@@ -52,11 +52,12 @@ CREATE TABLE Payments
 
 CREATE TABLE CarModels
 (
-  ModelID INTEGER not null primary key autoincrement,
-  VIN     TEXT    not null unique check(LENGTH(VIN) = 17),
-  Brand   TEXT    not null check(LENGTH(Brand) > 0),
-  Name    TEXT    not null check(LENGTH(Name) > 0),
-  Color   TEXT    not null check(LENGTH(Color) > 0)
+  ModelID       INTEGER not null primary key autoincrement,
+  VIN           TEXT    not null unique check(LENGTH(VIN) = 17),
+  Brand         TEXT    not null check(LENGTH(Brand) > 0),
+  Name          TEXT    not null check(LENGTH(Name) > 0),
+  Color         TEXT    not null check(LENGTH(Color) > 0),
+  SocketShape   TEXT    not null check(LENGTH(SocketShape) > 0)
 );
 
 CREATE TABLE Cars
@@ -103,11 +104,11 @@ CREATE TABLE ParkingHistory
 
 CREATE TABLE ChargingStations
 (
-  UID      INTEGER not null primary key autoincrement,
-  NSockets INTEGER not null check(NSockets > 0),
-  GPSloc   TEXT    not null check(GPSloc LIKE '_%, _%'),
-  CostHour REAL    not null check(CostHour > 0.0),
-  Shape    TEXT    not null check(LENGTH(Shape) > 0)
+  UID            INTEGER not null primary key autoincrement,
+  NSockets       INTEGER not null check(NSockets > 0),
+  GPSloc         TEXT    not null check(GPSloc LIKE '_%, _%'),
+  CostHour       REAL    not null check(CostHour > 0.0),
+  SocketShape    TEXT    not null check(LENGTH(SocketShape) > 0)
 );
 
 CREATE TABLE ChargingHistory

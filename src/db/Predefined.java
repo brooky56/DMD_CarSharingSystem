@@ -18,7 +18,7 @@ public class Predefined {
             regnum = "";
         }
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID FROM Cars NATURAL JOIN CarModels WHERE Color LIKE '" + color +
+                "SELECT CarID, Reg_number FROM Cars NATURAL JOIN CarModels WHERE Color LIKE '" + color +
                         "' AND Reg_number LIKE '%" + regnum + "%';");
     }
 
@@ -56,8 +56,8 @@ public class Predefined {
     public static Table busyPerPeriod(String date) {
         date = date.trim();
         String command = "SELECT count(DISTINCT CarID) * 100 / (SELECT count(CarID) FROM Cars) FROM Rents " +
-                "WHERE CAST(strftime('%s', DateTime_start) AS INTEGER) >= CAST(strftime('%s', '" + date + "', '-7 days') AS INTEGER) " +
-                "AND CAST(strftime('%s', DateTime_start) AS INTEGER) <= CAST(strftime('%s', '" + date + "') AS INTEGER)" +
+                "WHERE CAST(strftime('%s', DateTime_start) AS REAL) >= CAST(strftime('%s', '" + date + "', '-6 days') AS REAL) " +
+                "AND CAST(strftime('%s', DateTime_start) AS REAL) <= CAST(strftime('%s', '" + date + "', '+1 day') AS REAL)" +
                 " AND CAST(strftime('%H', DateTime_start) AS INTEGER) >= ";
         String scnd = " AND CAST(strftime('%H', DateTime_start) AS INTEGER) <= ";
 
@@ -74,12 +74,12 @@ public class Predefined {
         if (evening == null) return null;
 
         Table res = new Table(2, 3);
-        res.setTitle("Morning", 0);
-        res.setTitle("Afternoon", 1);
-        res.setTitle("Evening", 2);
-        res.setCell(morning.getCell(1, 0).toString() + "%", 1, 0);
-        res.setCell(afternoon.getCell(1, 0).toString() + "%", 1, 1);
-        res.setCell(evening.getCell(1, 0).toString() + "%", 1, 2);
+        res.setTitle("Morning (%)", 0);
+        res.setTitle("Afternoon (%)", 1);
+        res.setTitle("Evening (%)", 2);
+        res.setCell(morning.getCell(1, 0), 1, 0);
+        res.setCell(afternoon.getCell(1, 0), 1, 1);
+        res.setCell(evening.getCell(1, 0), 1, 2);
 
         return res;
     }
@@ -89,5 +89,15 @@ public class Predefined {
         id = id.trim();
         return SQLQuery.executeQueryWithOutput(
                 "SELECT Sum, DateTime FROM Payments WHERE UserID =  " + id + ";");
+    }
+
+    // Forth SELECT query
+    public static Table rentStatistics(String date) {
+        date = date.trim();
+        return SQLQuery.executeQueryWithOutput(
+                "SELECT avg(DistanceKM) AS 'Distance (km)'," +
+                        "avg((CAST(strftime('%s', DateTime_end) AS REAL)" +
+                        "- CAST(strftime('%s', DateTime_start) AS REAL)) / 3600) AS 'Duration (hours)'" +
+                        "FROM Rents WHERE date(DateTime_start) = '" + date + "';");
     }
 }

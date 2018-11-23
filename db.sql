@@ -68,7 +68,7 @@ CREATE TABLE Cars
 
 CREATE TABLE AvailableCars
 (
-  CarID  INTEGER not null references Cars,
+  CarID  INTEGER not null unique references Cars,
   Charge REAL    not null check(Charge >= 0.0 AND Charge <= 100.0),
   Health TEXT    not null check(LENGTH(Health) > 0),
   GPSloc TEXT    not null check(GPSloc LIKE '_%, _%')
@@ -82,7 +82,8 @@ CREATE TABLE Rents
   GPSloc_start   TEXT     not null check(GPSloc_start LIKE '_%, _%'),
   DateTime_end   DATETIME not null check(DateTime_end LIKE '____-__-__ __:__:__%'),
   GPSloc_end     TEXT     not null check(GPSloc_end LIKE '_%, _%'),
-  Paid           REAL     not null check(Paid >= 0.0)
+  Paid           REAL     not null check(Paid >= 0.0),
+  DistanceKM     REAL     not null check(DistanceKM > 0.0)
 );
 
 CREATE TABLE Parks
@@ -136,7 +137,8 @@ CREATE TABLE PartTypes
 (
   PartTypeID INTEGER not null primary key autoincrement,
   Name       TEXT    not null check(LENGTH(Name) > 0),
-  ModelID    INTEGER not null references CarModels
+  ModelID    INTEGER not null references CarModels,
+  unique (Name, ModelID)
 );
 
 CREATE TABLE Parts
@@ -153,14 +155,16 @@ CREATE TABLE CurrentCostOfPartTypes
 (
   PartTypeID INTEGER not null references PartTypes,
   ProviderID INTEGER not null references Providers,
-  Cost       REAL    not null check(Cost > 0.0)
+  Cost       REAL    not null check(Cost > 0.0),
+  unique (PartTypeID, ProviderID)
 );
 
 CREATE TABLE CurrentAmountOfParts
 (
   PartTypeID INTEGER not null references PartTypes,
   WID        INTEGER not null references Workshops,
-  Amount     INTEGER not null check(Amount >= 0)
+  Amount     INTEGER not null check(Amount >= 0),
+  unique (PartTypeID, WID)
 );
 
 CREATE TABLE Repairs
@@ -211,14 +215,14 @@ INSERT INTO Cars (ModelID, Reg_number) VALUES (1, 'RU202020');
 
 
 
-INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000);
-INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000);
-INSERT INTO Rents VALUES (1, 3, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000);
-INSERT INTO Rents VALUES (3, 4, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000);
-INSERT INTO Rents VALUES (2, 1, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000);
-INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000);
-INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000);
-INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000);
+INSERT INTO Rents VALUES (1, 1, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 2, '2017-01-01 07:00:00', '0, 0', '2017-01-01 08:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 3, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (3, 4, '2017-01-01 08:00:00', '10, 10', '2017-01-01 09:00:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (2, 1, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 2, '2017-01-01 12:00:00', '0, 0', '2017-01-01 13:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 1, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 2, '2017-01-01 17:00:00', '0, 0', '2017-01-01 18:00:00', '10, 10', 1000, 5);
 
 
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, Shape) VALUES (10, '50, 40', 10.5, 'Basic');

@@ -29,17 +29,37 @@ public class Common {
         access.closeConnection();
     }
 
-    public static String int2Hour(int h){
+    public static String int2Hour(int h) {
         if (h < 10) return "0" + Integer.toString(h);
         if (h == 24) return "00";
         return Integer.toString(h);
     }
 
+    public static double square(double d) {
+        return d * d;
+    }
+
+    public static double distanceBetweenGPSlocs(String l1, String l2) {
+        String[] loc1 = l1.split(", ");
+        String[] loc2 = l2.split(", ");
+        double lat1 = Math.toRadians(Double.parseDouble(loc1[0]));
+        double lat2 = Math.toRadians(Double.parseDouble(loc2[0]));
+        double long1 = Math.toRadians(Double.parseDouble(loc1[1]));
+        double long2 = Math.toRadians(Double.parseDouble(loc2[1]));
+
+        double dlon = long2 - long1;
+        double y = Math.sqrt(square(Math.cos(lat2) * Math.sin(dlon))
+                + square(Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dlon)));
+        double x = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lat2);
+        return 6371.302 * Math.atan2(y, x);
+    }
+
     public static void main(String[] args) {
         establishConnection();
-        Table t = Predefined.findCar("White AN");
+//        Table t = Predefined.findCar("White AN");
 //        Table t = Predefined.socketsPerHour("2017-12-01");
 //        Table t = Predefined.busyPerPeriod("2017-01-04");
+        Table t = Predefined.rentStatistics("2017-01-01");
         System.out.println(t.toString());
     }
 }

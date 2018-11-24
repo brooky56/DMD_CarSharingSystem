@@ -237,6 +237,25 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
 INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
   VALUES ('KroosMadrid', 'SuwQesOcT', 'Kross', 'Tony', 10);
 
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (1, 12.5,  '2018-11-20 08:20:01');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (2, 10.5,  '2018-11-21 11:10:02');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (3, 7.5,   '2018-11-22 19:00:03');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (4, 3.5,   '2018-11-20 08:21:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (5, 15.52, '2018-11-21 14:15:45');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (6, 7.75,  '2018-11-21 17:12:22');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (7, 10.05,  '2018-11-22 10:00:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (8, 4.65,  '2018-11-22 09:31:25');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (9, 2.45,  '2018-11-23 07:45:18');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (10, 24.35, '2018-11-23 08:20:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (1, 4.53,  '2018-11-22 08:41:09');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (5, 2.96,  '2018-11-22 15:46:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (2, 7.45,  '2018-11-23 16:32:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (6, 6.32,  '2018-11-22 20:22:21');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (2, 54.11,  '2018-11-21 09:25:32');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (2, 3.94,  '2018-11-23 08:20:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (8, 23.11,  '2018-11-23 08:25:00');
+INSERT INTO Payments(UserID, Paid, DateTime) VALUES (8, 5.54,  '2018-11-23  19:54:32');
+
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Volkswagen', 'Golf', 'J1772');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'Mennekes');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Ford', 'Fusion', 'CHAdeMO');
@@ -276,6 +295,40 @@ INSERT INTO Parks(NPlaces, GPSloc) VALUES (20,  '52.5175205, 13.3786468');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (55,  '52.5175205, 13.3786468');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (100, '52.5175205, 13.3786468');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (10,  '52.5176879, 13.3722649');
+
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (1, 1,  '2018-11-20 06:00', '2018-11-20 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (2, 3,  '2018-11-20 06:00', '2018-11-20 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (3, 4,  '2018-11-21 06:00', '2018-11-21 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (4, 5,  '2018-11-21 06:00', '2018-11-21 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (5, 7,  '2018-11-22 06:00', '2018-11-22 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (6, 8,  '2018-11-22 06:00', '2018-11-22 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (7, 9,  '2018-11-23 06:00', '2018-11-23 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (1, 10, '2018-11-23 06:00', '2018-11-23 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (2, 11, '2018-11-20 06:00', '2018-11-20 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (3, 12, '2018-11-20 06:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (4, 13, '2018-11-22 06:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (5, 14, '2018-11-22 06:00', '2018-11-22 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (6, 15, '2018-11-23 06:00', '2018-11-23 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (7, 16, '2018-11-23 06:00', '2018-11-23 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (1, 17, '2018-11-21 06:00', '2018-11-21 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (1, 18, '2018-11-21 06:00', '2018-11-21 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (2, 19, '2018-11-22 06:00', '2018-11-22 11:00');
+INSERT INTO ParkingHistory(ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (2, 20, '2018-11-22 06:00', '2018-11-22 11:00');
+
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 1, '2018-11-20 16:30:00', '2018-11-20 20:30:00', 30);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 2, '2018-11-21 09:30:00', '2018-11-21 19:30:00', 58.5);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 3, '2018-11-22 17:20:00', '2018-11-22 19:40:00', 14.12);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 4, '2018-11-23 08:30:00', '2018-11-23 10:30:00', 11.3);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 5, '2018-11-24 16:30:00');
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 6, '2018-11-20 11:45:00', '2018-11-20 15:45:00', 22.2);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (7, 7, '2018-11-21 16:30:00', '2018-11-21 20:30:00', 27.8);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 8, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 30);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 9, '2018-11-23 10:30:00', '2018-11-23 20:30:00', 58.5);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 10, '2018-11-24 12:30:00', '2018-11-24 13:30:00', 6.05);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 11, '2018-11-21 08:30:00', '2018-11-21 20:30:00', 67.8);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 12, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 40);
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 13, '2018-11-23 12:00:00');
+INSERT INTO ChargingHistory(UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (7, 14, '2018-11-24 16:30:00');
 
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5195766, 13.3892441', 7.5, 'J1772');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (15, '52.5250275, 13.4190273', 5.85, 'Mennekes');
@@ -370,32 +423,11 @@ INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (18, 3,
 INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (19, 4, 2, 335,  '2018-11-20');
 INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (20, 5, 2, 535,  '2018-11-23');
 
+INSERT INTO Repairs (WID, CarID, Date_start, Date_end) VALUES (1,2,'2018-11-20','2018-11-21');
+INSERT INTO Repairs (WID, CarID, Date_start, Date_end) VALUES (5,6,'2018-11-21','2018-11-22');
 
--- INSERT INTO CurrentAmountOfParts(PartTypeID, WID, Amount)
-INSERT INTO CurrentAmountOfParts VALUES (1, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (1, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (2, 1, 5);
-INSERT INTO CurrentAmountOfParts VALUES (2, 5, 5);
-INSERT INTO CurrentAmountOfParts VALUES (3, 2, 4);
-INSERT INTO CurrentAmountOfParts VALUES (4, 2, 5);
-INSERT INTO CurrentAmountOfParts VALUES (5, 3, 4);
-INSERT INTO CurrentAmountOfParts VALUES (6, 3, 5);
-INSERT INTO CurrentAmountOfParts VALUES (7, 4, 4);
-INSERT INTO CurrentAmountOfParts VALUES (7, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (8, 4, 5);
-INSERT INTO CurrentAmountOfParts VALUES (9, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (10, 5, 5);
-INSERT INTO CurrentAmountOfParts VALUES (11, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (12, 2, 5);
-INSERT INTO CurrentAmountOfParts VALUES (13, 3, 4);
-INSERT INTO CurrentAmountOfParts VALUES (14, 4, 5);
-INSERT INTO CurrentAmountOfParts VALUES (15, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (15, 2, 3);
-INSERT INTO CurrentAmountOfParts VALUES (16, 1, 5);
-INSERT INTO CurrentAmountOfParts VALUES (17, 2, 4);
-INSERT INTO CurrentAmountOfParts VALUES (18, 3, 5);
-INSERT INTO CurrentAmountOfParts VALUES (19, 4, 4);
-INSERT INTO CurrentAmountOfParts VALUES (20, 5, 5);
+INSERT INTO PartsUsed(RepairID, PartID) VALUES(1,6);
+INSERT INTO PartsUsed(RepairID, PartID) VALUES(2,8);
 
 
 

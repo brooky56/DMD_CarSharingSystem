@@ -15,7 +15,6 @@ DROP TABLE IF EXISTS Workshops;
 DROP TABLE IF EXISTS Providers;
 DROP TABLE IF EXISTS PartTypes;
 DROP TABLE IF EXISTS Parts;
-DROP TABLE IF EXISTS CurrentAmountOfParts;
 DROP TABLE IF EXISTS CurrentCostOfPartTypes;
 DROP TABLE IF EXISTS Repairs;
 DROP TABLE IF EXISTS PartsUsed;
@@ -158,14 +157,6 @@ CREATE TABLE CurrentCostOfPartTypes
   ProviderID INTEGER not null references Providers,
   Cost       REAL    not null check(Cost > 0.0),
   unique (PartTypeID, ProviderID)
-);
-
-CREATE TABLE CurrentAmountOfParts
-(
-  PartTypeID INTEGER not null references PartTypes,
-  WID        INTEGER not null references Workshops,
-  Amount     INTEGER not null check(Amount >= 0),
-  unique (PartTypeID, WID)
 );
 
 CREATE TABLE Repairs
@@ -345,57 +336,27 @@ INSERT INTO CurrentCostOfPartTypes VALUES (18, 5, 675);
 INSERT INTO CurrentCostOfPartTypes VALUES (19, 2, 335);
 INSERT INTO CurrentCostOfPartTypes VALUES (20, 2, 535);
 
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (1,  1, 1, 1500, '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (1,  5, 3, 1450, '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (2,  1, 1, 1200, '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (2,  5, 3, 1225, '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (3,  2, 2, 600,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (4,  2, 2, 1100, '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (5,  3, 5, 105,  '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (6,  3, 1, 75,   '2018-11-22');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (7,  4, 1, 110,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (7,  1, 3, 105,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (8,  4, 3, 300,  '2018-11-22');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (9,  5, 1, 150,  '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (10, 5, 1, 135,  '2018-11-23');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (11, 1, 4, 950,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (12, 2, 5, 1050, '2018-11-22');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (13, 3, 2, 65,   '2018-11-23');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (14, 4, 2, 35,   '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (15, 5, 2, 210,  '2018-11-22');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (15, 2, 5, 230,  '2018-11-22');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (16, 1, 2, 310,  '2018-11-23');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (17, 2, 3, 875,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (18, 3, 5, 675,  '2018-11-21');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (19, 4, 2, 335,  '2018-11-20');
-INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought)VALUES (20, 5, 2, 535,  '2018-11-23');
-
-
--- INSERT INTO CurrentAmountOfParts(PartTypeID, WID, Amount)
-INSERT INTO CurrentAmountOfParts VALUES (1, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (1, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (2, 1, 5);
-INSERT INTO CurrentAmountOfParts VALUES (2, 5, 5);
-INSERT INTO CurrentAmountOfParts VALUES (3, 2, 4);
-INSERT INTO CurrentAmountOfParts VALUES (4, 2, 5);
-INSERT INTO CurrentAmountOfParts VALUES (5, 3, 4);
-INSERT INTO CurrentAmountOfParts VALUES (6, 3, 5);
-INSERT INTO CurrentAmountOfParts VALUES (7, 4, 4);
-INSERT INTO CurrentAmountOfParts VALUES (7, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (8, 4, 5);
-INSERT INTO CurrentAmountOfParts VALUES (9, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (10, 5, 5);
-INSERT INTO CurrentAmountOfParts VALUES (11, 1, 4);
-INSERT INTO CurrentAmountOfParts VALUES (12, 2, 5);
-INSERT INTO CurrentAmountOfParts VALUES (13, 3, 4);
-INSERT INTO CurrentAmountOfParts VALUES (14, 4, 5);
-INSERT INTO CurrentAmountOfParts VALUES (15, 5, 4);
-INSERT INTO CurrentAmountOfParts VALUES (15, 2, 3);
-INSERT INTO CurrentAmountOfParts VALUES (16, 1, 5);
-INSERT INTO CurrentAmountOfParts VALUES (17, 2, 4);
-INSERT INTO CurrentAmountOfParts VALUES (18, 3, 5);
-INSERT INTO CurrentAmountOfParts VALUES (19, 4, 4);
-INSERT INTO CurrentAmountOfParts VALUES (20, 5, 5);
-
-
-
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (1,  1, 1, 1500, '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (1,  5, 3, 1450, '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (2,  1, 1, 1200, '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (2,  5, 3, 1225, '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (3,  2, 2, 600,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (4,  2, 2, 1100, '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (5,  3, 5, 105,  '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (6,  3, 1, 75,   '2018-11-22');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (7,  4, 1, 110,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (7,  1, 3, 105,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (8,  4, 3, 300,  '2018-11-22');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (9,  5, 1, 150,  '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (10, 5, 1, 135,  '2018-11-23');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (11, 1, 4, 950,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (12, 2, 5, 1050, '2018-11-22');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (13, 3, 2, 65,   '2018-11-23');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (14, 4, 2, 35,   '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (15, 5, 2, 210,  '2018-11-22');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (15, 2, 5, 230,  '2018-11-22');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (16, 1, 2, 310,  '2018-11-23');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (17, 2, 3, 875,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (18, 3, 5, 675,  '2018-11-21');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (19, 4, 2, 335,  '2018-11-20');
+INSERT INTO Parts (PartTypeID, WID, ProviderID, Paid, Date_bought) VALUES (20, 5, 2, 535,  '2018-11-23');

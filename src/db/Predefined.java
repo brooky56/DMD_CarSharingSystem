@@ -6,13 +6,15 @@ import main.Table;
 public class Predefined {
 
     // 1st SELECT query
+    // MODIFIED: input - color and part of registration number
+    //           output - cars with given color and registration number which contains given part
     public static Table findCar(String input) {
         if (input.isEmpty()) return null;
         String[] in = input.split("\\s");
         if (in.length < 2) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT CarID, Color, Reg_number FROM Cars WHERE Color LIKE '" + in[0] +
-                        "' AND Reg_number LIKE '%" + in[1] + "%';");
+                        "' AND Reg_number LIKE '%" + in[1] + "%' ORDER BY CarID;");
     }
 
     // 2nd SELECT query
@@ -72,10 +74,8 @@ public class Predefined {
     }
 
     private static String dateConstraint(String name, int daysago) {
-        return "CAST(strftime('%s', " + name + ") AS INTEGER) >= " +
-                "CAST(strftime('%s', 'now', '-" + (daysago - 1) + " days') AS INTEGER)"/* +
-                " AND CAST(strftime('%s', " + name + ") AS INTEGER) < " +
-                "CAST(strftime('%s', 'now', '+1 day') AS INTEGER)"*/;
+        return "CAST(strftime('%s', " + name + ", 'start of day') AS INTEGER) >= " +
+                "CAST(strftime('%s', 'now', 'start of day', '-" + daysago + " days') AS INTEGER)";
     }
 
     private static String timeOfDayConstraint(String start, String end) {
@@ -87,7 +87,8 @@ public class Predefined {
     public static Table userPayments(String input) {
         if (input.isEmpty()) return null;
         return SQLQuery.executeQueryWithOutput(
-                "SELECT Paid AS 'Paid ($)', DateTime FROM Payments WHERE UserID = " + input + ";");
+                "SELECT DateTime, Paid AS 'Paid ($)' FROM Payments WHERE UserID = " + input + " AND " +
+                        dateConstraint("DateTime", 30) + ";");
     }
 
     // 5th SELECT query
@@ -96,12 +97,13 @@ public class Predefined {
         return SQLQuery.executeQueryWithOutput(
                 "SELECT avg(DistanceKM) AS 'Avg. distance (km)', avg(" +
                         "(CAST(strftime('%s', DateTime_end) AS REAL) - " +
-                        "CAST(strftime('%s', DateTime_start) AS REAL)) / 3600) " +
+                        "CAST(strftime('%s', DateTime_start) AS REAL)) / 3600.0) " +
                         "AS 'Avg. duration (hours)' FROM Rents " +
                         "WHERE date(DateTime_start) = date('" + input + "');");
     }
 
     // 6th SELECT query
+    // MODIFIED: input - amount of days (before now) within to gather stats
     public static Table popularPlaces(String input) {
         if (input.isEmpty() || Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
@@ -146,36 +148,68 @@ public class Predefined {
     // 7th SELECT query
     public static Table unpopularCars() {
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID, count(CarID) AS 'Amount of orders' FROM Rents WHERE " +
+                "SELECT CarID, count(CarID) AS 'Amount of rents' FROM Rents WHERE " +
                         dateConstraint("DateTime_start", 90) +
                         " GROUP BY CarID ORDER BY count(CarID) ASC " +
                         "LIMIT CEIL((SELECT count(CarID) FROM Cars) * 0.1);");
     }
 
-    // 9th SELECT query
-    public static Table oftenRequiredParts(String input) {
+    // 8th SELECT query
+    // CHANGED: input - amount of days (before now) within to gather stats
+    // output - average per day distance travelled, income from rents, outlays for charging and amount of charging
+    // of every car within last days
+    public static Table carStats(String input) {
         if (input.isEmpty() || Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID, count(CarID) AS 'Amount of orders' FROM Rents WHERE " +
-                        dateConstraint("DateTime_start", 90) +
-                        " GROUP BY CarID ORDER BY count(CarID) ASC " +
-                        "LIMIT CEIL((SELECT count(CarID) FROM Cars) * 0.1);");
+                "SELECT CarID, " +
+                        avgPer("sum(D)", days, "Avg. distance per day (km)") + ", " +
+                        avgPer("sum(C1)", days, "Avg. income from rents per day ($)") + ", " +
+                        avgPer("sum(C2)", days, "Avg. outlays for charging per day ($)") + ", " +
+                        avgPer("sum(A)", days, "Avg. amount of charging per day") + " FROM " +
+                        "(SELECT CarID, date(DateTime_end) AS Date, sum(DistanceKM) AS D, sum(Cost) AS C1 " +
+                        "FROM Rents GROUP BY CarID, Date) LEFT OUTER JOIN " +
+                        "(SELECT CarID, date(DateTime_start) AS Date, sum(Cost) AS C2, count(*) AS A " +
+                        "FROM ChargingHistory GROUP BY CarID, Date) USING (CarID, Date) WHERE " +
+                        dateConstraint("Date", days) + " GROUP BY CarID ORDER BY CarID");
+    }
+
+    private static String avgPer(String in, int num, String name) {
+        return "printf('%.2f', " + in + " / " + num + ".0) AS '" + name + "'";
+    }
+
+    // 9th SELECT query
+    // MODIFIED: input - amount of weeks (before now) within to gather stats
+    //           output - the most used per week and expensive part types by every workshop
+    public static Table oftenRequiredParts(String input) {
+        if (input.isEmpty() || Common.isntInt(input)) return null;
+        int weeks = Integer.parseInt(input);
+        return SQLQuery.executeQueryWithOutput(
+                "SELECT WID, PartTypeId, Name, max(Amount) AS 'Avg. amount used per week' FROM " +
+                        "(SELECT WID, PartTypeId, Name, CEIL(count(PartID) / " + weeks + ") " +
+                        "AS Amount, sum(Paid) AS P FROM Repairs NATURAL JOIN " +
+                        "(SELECT RepairID, PartID, PartTypeID, Name, Paid " +
+                        "FROM PartTypes NATURAL JOIN Parts NATURAL JOIN PartsUsed) WHERE " +
+                        dateConstraint("Date_start", weeks * 7) +
+                        " GROUP BY WID, PartTypeID ORDER BY P DESC) GROUP BY WID ORDER BY WID;");
     }
 
     // 10th SELECT query
+    // MODIFIED: input - amount of days (before now) within to gather stats
     public static Table mostExpensiveCarModel(String input) {
         if (input.isEmpty() || Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
         return SQLQuery.executeQueryWithOutput(
-                "SELECT ModelID, (ChargingCost + RepairCost) / " + days + " AS 'Avg. paid per day ($)' FROM " +
+                "SELECT ModelID, " +
+                        avgPer("(ChargingCost + RepairCost)", days, "Avg. paid per day ($)") +
+                        " FROM " +
                         "(SELECT ModelID, sum(Cost) AS ChargingCost FROM Cars NATURAL JOIN ChargingHistory WHERE " +
-                        dateConstraint("DateTime_start", days) + "GROUP BY ModelID) " +
+                        dateConstraint("DateTime_start", days) + " GROUP BY ModelID) " +
                         "NATURAL JOIN " +
                         "(SELECT ModelID, sum(Cost) AS RepairCost FROM Cars NATURAL JOIN Repairs NATURAL JOIN " +
                         "(SELECT RepairID, sum(Paid) AS Cost FROM Parts NATURAL JOIN PartsUsed GROUP BY RepairID) WHERE " +
-                        dateConstraint("Date_start", days) + "GROUP BY ModelID) " +
-                        "ORDER BY 'Avg. paid per day ($)' DESC LIMIT 1;");
+                        dateConstraint("Date_start", days) + " GROUP BY ModelID) " +
+                        "ORDER BY 'Avg. outlay per day ($)' DESC LIMIT 1;");
     }
 
     public static void main(String[] args) {

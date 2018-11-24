@@ -129,16 +129,16 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: 2000-01-01");
                     break;
                 case "Query 6":
-                    textAreaForInput.setPromptText("Sample input: 90");
+                    textAreaForInput.setPromptText("Sample input: 7");
                     break;
                 case "Query 7":
                     textAreaForInput.setPromptText("No input required");
                     break;
                 case "Query 8":
-                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
+                    textAreaForInput.setPromptText("Sample input: 7");
                     break;
                 case "Query 9":
-                    textAreaForInput.setPromptText("Sample input: 90");
+                    textAreaForInput.setPromptText("Sample input: 4");
                     break;
                 case "Query 10":
                     textAreaForInput.setPromptText("Sample input: 90");
@@ -176,7 +176,7 @@ public class Controller {
                 t = Predefined.unpopularCars();
                 break;
             case "Query 8":
-                //t = Predefined.socketsPerHour(input);
+                t = Predefined.carStats(input);
                 break;
             case "Query 9":
                 t = Predefined.oftenRequiredParts(input);

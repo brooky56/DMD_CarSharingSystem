@@ -77,8 +77,8 @@ CREATE TABLE AvailableCars
 
 CREATE TABLE Rents
 (
-  CarID          INTEGER  not null references Cars,
   UserID         INTEGER  not null references Customers,
+  CarID          INTEGER  not null references Cars,
   DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__'),
   GPSloc_start   TEXT     not null check(GPSloc_start LIKE '_%, _%'),
   DateTime_end   DATETIME not null check(DateTime_end LIKE '____-__-__ __:__'),
@@ -270,13 +270,15 @@ INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'B-RU326', 'Brown');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'B-RU663', 'Beige');
 
 INSERT INTO Rents VALUES (1, 1, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 2, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 3, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (3, 4, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (2, 1, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 3, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (3, 1, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
+INSERT INTO Rents VALUES (4, 3, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
 INSERT INTO Rents VALUES (1, 2, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 1, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 1, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 3, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
 INSERT INTO Rents VALUES (2, 2, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (1, 3, '2018-11-22 17:00', '0, 0', '2018-11-22 18:00', '10, 10', 1000, 5);
+INSERT INTO Rents VALUES (2, 2, '2018-11-22 17:00', '0, 0', '2018-11-22 18:00', '10, 10', 1000, 5);
 
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (50,  '52.5184755, 13.3865654');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (45,  '52.5174873, 13.3807356');

@@ -8,7 +8,6 @@ public class Common {
     public static final String PATH_Database = "Database.db";
     private static ConnectionToSQL access;
     public static final String NULL_ELEMENT = "<null>";
-    public static final String NOW = "now";
     public static final String Morning_Start = "7";
     public static final String Morning_End = "10";
     public static final String Afternoon_Start = "12";
@@ -29,9 +28,18 @@ public class Common {
     }
 
     public static String int2Hour(int h) {
-        if (h < 10) return "0" + Integer.toString(h);
+        if (h < 10) return "0" + h;
         if (h == 24) return "00";
         return Integer.toString(h);
+    }
+
+    public static boolean isntInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
     }
 
     public static double square(double d) {

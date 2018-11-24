@@ -73,7 +73,7 @@ public class Controller {
 
     private void fullFillPredefinedQueryList() {
         ObservableList<String> queryList = FXCollections.observableArrayList();
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < 11; ++i) {
             queryList.add("Query " + i);
         }
         predefinedQueryBox.setItems(queryList);
@@ -117,27 +117,31 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: White AN");
                     break;
                 case "Query 2":
-                    textAreaForInput.setPromptText("Sample input: 2017-12-01");
+                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
                     break;
                 case "Query 3":
                     textAreaForInput.setPromptText("No input required");
                     break;
                 case "Query 4":
-                    textAreaForInput.setPromptText("Sample input: 01");
+                    textAreaForInput.setPromptText("Sample input: 1");
                     break;
                 case "Query 5":
-                    textAreaForInput.setPromptText("Sample input: 2018-01-01");
+                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
                     break;
                 case "Query 6":
-                    textAreaForInput.setPromptText("No input required");
+                    textAreaForInput.setPromptText("Sample input: 90");
                     break;
                 case "Query 7":
+                    textAreaForInput.setPromptText("No input required");
                     break;
                 case "Query 8":
+                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
                     break;
                 case "Query 9":
+                    textAreaForInput.setPromptText("Sample input: 90");
                     break;
                 case "Query 10":
+                    textAreaForInput.setPromptText("Sample input: 90");
                     break;
             }
         }
@@ -166,19 +170,19 @@ public class Controller {
                 t = Predefined.rentStatistics(input);
                 break;
             case "Query 6":
-                t = Predefined.popularPlaces();
+                t = Predefined.popularPlaces(input);
                 break;
             case "Query 7":
-                //t = Predefined.socketsPerHour(input);
+                t = Predefined.unpopularCars();
                 break;
             case "Query 8":
                 //t = Predefined.socketsPerHour(input);
                 break;
             case "Query 9":
-                //t = Predefined.socketsPerHour(input);
+                t = Predefined.oftenRequiredParts(input);
                 break;
             case "Query 10":
-                //t = Predefined.socketsPerHour(input);
+                t = Predefined.mostExpensiveCarModel(input);
                 break;
         }
         buildViewFromTable(t);
@@ -202,7 +206,7 @@ public class Controller {
     }
 
     private void clear() {
-        for (int i = 0; i < table.getItems().size(); i++) {
+        for (int i = 0; i < table.getItems().size(); ++i) {
             table.getItems().clear();
         }
         table.getColumns().clear();
@@ -218,7 +222,7 @@ public class Controller {
         ObservableList<String> row;
         TableColumn col;
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-        for (int i = 0; i < t.width; i++) {
+        for (int i = 0; i < t.width; ++i) {
             col = new TableColumn(t.getTitle(i).toString());
             final int j = i;
             col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
@@ -226,9 +230,9 @@ public class Controller {
             System.out.println("Column [" + i + "] ");
         }
 
-        for (int i = 1; i < t.height; i++) {
+        for (int i = 1; i < t.height; ++i) {
             row = FXCollections.observableArrayList();
-            for (int j = 0; j < t.width; j++) {
+            for (int j = 0; j < t.width; ++j) {
                 if (t.getCell(i, j) == null) {
                     row.add(Common.NULL_ELEMENT);
                 } else {

@@ -95,9 +95,9 @@ public class Predefined {
     public static Table rentStatistics(String input) {
         if (input.isEmpty()) return null;
         return SQLQuery.executeQueryWithOutput(
-                "SELECT avg(DistanceKM) AS 'Avg. distance (km)', avg(" +
-                        "(CAST(strftime('%s', DateTime_end) AS REAL) - " +
-                        "CAST(strftime('%s', DateTime_start) AS REAL)) / 3600.0) " +
+                "SELECT printf('%.2f', avg(DistanceKM)) AS 'Avg. distance (km)', " +
+                        "printf('%.2f', avg((CAST(strftime('%s', DateTime_end) AS REAL) - " +
+                        "CAST(strftime('%s', DateTime_start) AS REAL)) / 3600.0)) " +
                         "AS 'Avg. duration (hours)' FROM Rents " +
                         "WHERE date(DateTime_start) = date('" + input + "');");
     }
@@ -107,41 +107,58 @@ public class Predefined {
     public static Table popularPlaces(String input) {
         if (input.isEmpty() || Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
-        Table t = SQLQuery.executeQueryWithOutput(
-                "SELECT * FROM (" +
-                        selectPlaces(Common.Morning_Start, Common.Morning_End) + "), (" +
-                        selectPlaces(Common.Afternoon_Start, Common.Afternoon_End) + "), (" +
-                        selectPlaces(Common.Evening_Start, Common.Evening_End) + ");"
-        );
-        if (t == null) return null;
+        String dc = dateConstraint("DateTime_start", days) + " AND ";
+        Table[][] tt = new Table[3][2];
+        getTables("start", dc, tt, 0);
+        getTables("end", dc, tt, 1);
 
-        int rowspertime = Math.min(t.height - 1, 3);
+
+        int mrows = Math.max(tt[0][0].height, tt[0][1].height) - 1;
+        int arows = Math.max(tt[1][0].height, tt[1][1].height) - 1;
+        int erows = Math.max(tt[2][0].height, tt[2][1].height) - 1;
+        int rowspertime = 0;
+        for (int i = 0; i < 3; ++i) {
+            if (tt[i][0].height > rowspertime) rowspertime = tt[i][0].height;
+            if (tt[i][1].height > rowspertime) rowspertime = tt[i][1].height;
+        }
+        --rowspertime;
+
         Table res = new Table(1 + rowspertime * 3, 3);
         res.setTitle("Time of day", 0);
         res.setTitle("Top of pick-ups", 1);
         res.setTitle("Top of destinations", 2);
 
-        fillPopularPlacesTable(res, 1, t, 0, "Morning", rowspertime);
-        fillPopularPlacesTable(res, 1 + rowspertime, t, 2, "Afternoon", rowspertime);
-        fillPopularPlacesTable(res, 1 + rowspertime + rowspertime, t, 4, "Evening", rowspertime);
+        fillPopularPlacesTable(res, 1, tt[0], "Morning", rowspertime);
+        fillPopularPlacesTable(res, 1 + rowspertime, tt[1], "Afternoon", rowspertime);
+        fillPopularPlacesTable(res, 1 + rowspertime + rowspertime, tt[2], "Evening", rowspertime);
         return res;
     }
 
-    private static String selectPlaces(String start, String end) {
-        String c = timeOfDayConstraint(start, end);
-        return "SELECT " +
-                "(SELECT GPSloc_start FROM Rents WHERE " + c +
-                " GROUP BY GPSloc_start ORDER BY count(GPSloc_start)) AS 'Top of pick-ups', " +
-                "(SELECT GPSloc_end FROM Rents WHERE " + c +
-                " GROUP BY GPSloc_end ORDER BY count(GPSloc_end)) AS 'Top of destinations'";
+    private static void getTables(String type, String dc, Table[][] tt, int j) {
+        String s = "SELECT GPSloc_" + type + " FROM Rents WHERE ";
+        String g = " GROUP BY GPSloc_" + type + " ORDER BY count(GPSloc_" + type + ") DESC LIMIT 3;";
+        tt[0][j] = SQLQuery.executeQueryWithOutput(
+                s + dc + timeOfDayConstraint(Common.Morning_Start, Common.Morning_End) + g
+        );
+        tt[1][j] = SQLQuery.executeQueryWithOutput(
+                s + dc + timeOfDayConstraint(Common.Afternoon_Start, Common.Afternoon_End) + g
+        );
+        tt[2][j] = SQLQuery.executeQueryWithOutput(
+                s + dc + timeOfDayConstraint(Common.Evening_Start, Common.Evening_End) + g
+        );
     }
 
-    private static void fillPopularPlacesTable(Table res, int row, Table t, int col, String time, int rowspertime) {
+    private static void fillPopularPlacesTable(Table res, int row, Table[] t, String time, int rowspertime) {
         res.setCell(time, row, 0);
-        for (int i = 1; i <= rowspertime; ++i) {
-            int brow = row + i - 1;
-            res.setCell(t.getCell(i, col), brow, 1);
-            res.setCell(t.getCell(i, col + 1), brow, 2);
+        for (int i = 1; i < rowspertime; ++i) {
+            res.setCell("", i + row, 0);
+        }
+        res.setCell(time, row, 0);
+        for (int j = 0; j < 2; ++j) {
+            for (int i = 1; i < t[j].height; ++i) {
+                int brow = row + i - 1;
+                res.setCell(t[j].getCell(i, 0), brow, j + 1);
+            }
         }
     }
 
@@ -212,8 +229,13 @@ public class Predefined {
                         "ORDER BY 'Avg. outlay per day ($)' DESC LIMIT 1;");
     }
 
-    public static void main(String[] args) {
-        Common.establishConnection();
-        System.out.println(popularPlaces("90").toString());
+    private static String ternaryFullOuterJoin(String t1, String t2, String t3, String keys) {
+        return "WITH C AS (" + fullOuterJoin(t1, t2, keys) + ") " + fullOuterJoin("C", t3, keys);
+    }
+
+    private static String fullOuterJoin(String t1, String t2, String keys) {
+        keys = " USING (" + keys + ")";
+        String s = "SELECT " + t1 + ".*, " + t2 + ".* FROM ";
+        return s + t1 + " LEFT JOIN " + t2 + keys + " UNION " + s + t2 + " LEFT JOIN " + t1 + keys;
     }
 }

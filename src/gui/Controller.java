@@ -94,8 +94,8 @@ public class Controller {
     private void onButtonExecuteQueryClick() {
         clear();
         String query = queryField.getText().toUpperCase();
-        if (query.length() > 7) {
-            if (query.startsWith("SELECT ")) {
+        if (query.length() > 5) {
+            if (query.startsWith("SELECT ") || query.startsWith("WITH ")) {
                 buildViewByCommand(query);
             } else if (query.startsWith("INSERT INTO ") || query.startsWith("UPDATE ") || query.startsWith("DELETE ")) {
                 SQLQuery.executeQueryNoOutput(query);
@@ -117,7 +117,7 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: White AN");
                     break;
                 case "Query 2":
-                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
+                    textAreaForInput.setPromptText("Sample input: 2018-11-23");
                     break;
                 case "Query 3":
                     textAreaForInput.setPromptText("No input required");
@@ -126,7 +126,7 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: 1");
                     break;
                 case "Query 5":
-                    textAreaForInput.setPromptText("Sample input: 2000-01-01");
+                    textAreaForInput.setPromptText("Sample input: 2018-11-23");
                     break;
                 case "Query 6":
                     textAreaForInput.setPromptText("Sample input: 7");

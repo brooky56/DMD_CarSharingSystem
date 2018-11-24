@@ -269,17 +269,6 @@ INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'B-AN532', 'Black');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'B-RU326', 'Brown');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'B-RU663', 'Beige');
 
-INSERT INTO Rents VALUES (1, 1, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 3, '2018-11-23 07:00', '0, 0', '2018-11-23 08:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (3, 1, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (4, 3, '2018-11-23 08:00', '10, 10', '2018-11-23 09:00', '0, 0', 1000, 5);
-INSERT INTO Rents VALUES (1, 2, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 1, '2018-11-23 12:00', '0, 0', '2018-11-23 13:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 3, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 2, '2018-11-23 17:00', '0, 0', '2018-11-23 18:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (1, 3, '2018-11-22 17:00', '0, 0', '2018-11-22 18:00', '10, 10', 1000, 5);
-INSERT INTO Rents VALUES (2, 2, '2018-11-22 17:00', '0, 0', '2018-11-22 18:00', '10, 10', 1000, 5);
-
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (50,  '52.5184755, 13.3865654');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (45,  '52.5174873, 13.3807356');
 INSERT INTO Parks(NPlaces, GPSloc) VALUES (30,  '52.5174873, 13.380735');
@@ -295,13 +284,6 @@ INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (1
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (12, '52.5214633, 13.3882999', 8.0, 'CHAdeMO');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5038338, 13.3803928', 5.55, 'Mennekes');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.51024, 13.3754039', 6.95, 'CSS Combo');
-
-INSERT INTO ChargingHistory VALUES (1, 1, '2017-12-01 12:00:00', '2017-12-01 13:00:00', 100.5);
-INSERT INTO ChargingHistory VALUES (1, 2, '2017-12-01 20:00:00', '2017-12-01 21:00:00', 100.5);
-INSERT INTO ChargingHistory VALUES (2, 1, '2017-12-01 20:00:00', '2017-12-01 20:45:00', 50.0);
-INSERT INTO ChargingHistory VALUES (2, 2, '2017-12-02 09:00:00', '2017-12-02 09:45:00', 50.0);
-INSERT INTO ChargingHistory VALUES (3, 3, '2018-11-02 09:00:00', '2018-12-02 09:30:00', 1000.0);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (3, 2, '2018-11-04 09:00:00');
 
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (10, '52.5151250, 13.5041570');
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (7,  '52.5165847, 13.3141253');

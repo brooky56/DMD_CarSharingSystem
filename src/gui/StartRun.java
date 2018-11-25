@@ -4,12 +4,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.Common;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
+
 
 public class StartRun extends Application {
 
@@ -23,6 +23,8 @@ public class StartRun extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
         primaryStage.setMinWidth(625);
         primaryStage.setMinHeight(500);
+        Image image = new Image("file:icon.png");
+        primaryStage.getIcons().add(image);
         primaryStage.setTitle("Self-driving management system ");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

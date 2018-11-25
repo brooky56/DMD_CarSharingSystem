@@ -186,7 +186,7 @@ public class Predefined {
 
     // 8th SELECT query
     // CHANGED: input - amount of days (before now) within to gather stats
-    // output - average per day distance travelled, income from rents, outlays for charging and amount of charging
+    // output - average per day distance travelled, income from rents and outlays for charging
     // of every car within last days
     public static Table carStats(String input) {
         if (Common.isntInt(input)) return null;
@@ -195,12 +195,11 @@ public class Predefined {
         return SQLQuery.executeQueryWithOutput(
                 "SELECT CarID, " +
                         avgPer("sum(D)", days, "Avg. distance per day (km)") + ", " +
-                        avgPer("sum(C1)", days, "Avg. income from rents per day ($)") + ", " +
-                        avgPer("sum(C2)", days, "Avg. outlays for charging per day ($)") + ", " +
-                        avgPer("sum(A)", days, "Avg. amount of charging per day") + " FROM " +
+                        avgPer("sum(C1)", days, "Avg. income per day ($)") + ", " +
+                        avgPer("sum(C2)", days, "Avg. outlays per day ($)") + " FROM " +
                         "(SELECT CarID, date(DateTime_end) AS Date, sum(DistanceKM) AS D, sum(Cost) AS C1 " +
                         "FROM Rents GROUP BY CarID, Date) LEFT OUTER JOIN " +
-                        "(SELECT CarID, date(DateTime_start) AS Date, sum(Cost) AS C2, count(*) AS A " +
+                        "(SELECT CarID, date(DateTime_start) AS Date, sum(Cost) AS C2 " +
                         "FROM ChargingHistory GROUP BY CarID, Date) USING (CarID, Date) WHERE " +
                         dateConstraint("Date", days) + " GROUP BY CarID ORDER BY CarID");
     }

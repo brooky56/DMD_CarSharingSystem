@@ -17,6 +17,7 @@ import main.Table;
 import java.sql.SQLException;
 
 public class Controller {
+    private static final double SCROLLBAR_WIDTH = 16.;
 
     @FXML
     private Label predefinedQueryLabel;
@@ -222,12 +223,13 @@ public class Controller {
         ObservableList<String> row;
         TableColumn col;
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-        for (int i = 0; i < t.width; ++i) {
-            col = new TableColumn(t.getTitle(i).toString());
-            final int j = i;
-            col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+        for (int j = 0; j < t.width; ++j) {
+            col = new TableColumn(t.getTitle(j).toString());
+            col.setPrefWidth((table.getWidth() - SCROLLBAR_WIDTH) / t.width);
+            final int k = j;
+            col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(k).toString()));
             table.getColumns().add(col);
-            System.out.println("Column [" + i + "] ");
+            System.out.println("Column [" + j + "] ");
         }
 
         for (int i = 1; i < t.height; ++i) {

@@ -94,11 +94,12 @@ public class Controller {
     @FXML
     private void onButtonExecuteQueryClick() {
         clear();
-        String query = queryField.getText().toUpperCase();
-        if (query.length() > 5) {
-            if (query.startsWith("SELECT ") || query.startsWith("WITH ")) {
+        String query = queryField.getText();
+        String up = query.toUpperCase();
+        if (up.length() > 7) {
+            if (up.startsWith("SELECT ") || up.startsWith("WITH ")) {
                 buildViewByCommand(query);
-            } else if (query.startsWith("INSERT INTO ") || query.startsWith("UPDATE ") || query.startsWith("DELETE ")) {
+            } else if (up.startsWith("INSERT INTO ") || up.startsWith("UPDATE ") || up.startsWith("DELETE ")) {
                 SQLQuery.executeQueryNoOutput(query);
             }
         }

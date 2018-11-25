@@ -316,18 +316,18 @@ INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (1
 
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 1, '2018-11-20 16:30:00', '2018-11-20 20:30:00', 30);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 2, '2018-11-21 09:30:00', '2018-11-21 19:30:00', 58.5);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 3, '2018-11-22 17:20:00', '2018-11-22 19:40:00', 14.12);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 4, '2018-11-23 08:30:00', '2018-11-23 10:30:00', 11.3);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 5, '2018-11-24 16:30:00');
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 6, '2018-11-20 11:45:00', '2018-11-20 15:45:00', 22.2);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (7, 7, '2018-11-21 16:30:00', '2018-11-21 20:30:00', 27.8);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 8, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 30);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 9, '2018-11-23 10:30:00', '2018-11-23 20:30:00', 58.5);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 3, '2018-11-22 17:20:00', '2018-11-22 19:40:00', 17.5);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 4, '2018-11-23 08:30:00', '2018-11-23 10:30:00', 11.3);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 5, '2018-11-24 16:30:00', '2018-11-24 17:30:00', 8.0);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 6, '2018-11-20 11:45:00', '2018-11-20 15:45:00', 23.4);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 7, '2018-11-21 16:30:00', '2018-11-21 20:30:00', 32);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 8, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 23.4);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 9, '2018-11-23 10:30:00', '2018-11-23 20:30:00', 56.5);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 10, '2018-11-24 12:30:00', '2018-11-24 13:30:00', 6.05);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 11, '2018-11-21 08:30:00', '2018-11-21 20:30:00', 67.8);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 12, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 40);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (6, 13, '2018-11-23 12:00:00');
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (7, 14, '2018-11-24 16:30:00');
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 11, '2018-11-21 08:30:00', '2018-11-21 20:30:00', 56.5);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 12, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 24,2);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (4, 13, '2018-11-23 12:00:00', '2018-11-23 13:30:00', 8,475);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (1, 14, '2018-11-24 16:30:00', '2018-11-24 18:30:00', 15);
 
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (10, '52.5151250, 13.5041570');
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (7,  '52.5165847, 13.3141253');

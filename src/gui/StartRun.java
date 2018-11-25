@@ -7,8 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import main.Common;
 
+import java.awt.*;
 import java.io.IOException;
-
+import java.net.URL;
 
 public class StartRun extends Application {
 

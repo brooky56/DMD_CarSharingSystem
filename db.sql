@@ -229,23 +229,17 @@ INSERT INTO Customers (Username, Password, First_name, Last_name, ContactID)
   VALUES ('KroosMadrid', 'SuwQesOcT', 'Kross', 'Tony', 10);
 
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (1, 12.5,  '2018-11-20 08:20:01.0');
+INSERT INTO Payments (UserID, Paid, DateTime) VALUES (4, 25.1,   '2018-11-20 08:21:00.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (2, 10.5,  '2018-11-21 11:10:02.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (3, 7.5,   '2018-11-22 19:00:03.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (4, 3.5,   '2018-11-20 08:21:00.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (5, 15.52, '2018-11-21 14:15:45.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (6, 7.75,  '2018-11-21 17:12:22.0');
+INSERT INTO Payments (UserID, Paid, DateTime) VALUES (3, 7.5,   '2018-11-22 19:00:03.0');
+INSERT INTO Payments (UserID, Paid, DateTime) VALUES (1, 4.53,  '2018-11-22 08:41:09.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (7, 10.05,  '2018-11-22 10:00:00.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (8, 4.65,  '2018-11-22 09:31:25.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (9, 2.45,  '2018-11-23 07:45:18.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (10, 24.35, '2018-11-23 08:20:00.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (1, 4.53,  '2018-11-22 08:41:09.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (5, 2.96,  '2018-11-22 15:46:00.0');
 INSERT INTO Payments (UserID, Paid, DateTime) VALUES (2, 7.45,  '2018-11-23 16:32:00.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (6, 6.32,  '2018-11-22 20:22:21.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (2, 54.11,  '2018-11-21 09:25:32.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (2, 3.94,  '2018-11-23 08:20:00.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (8, 23.11,  '2018-11-23 08:25:00.0');
-INSERT INTO Payments (UserID, Paid, DateTime) VALUES (8, 5.54,  '2018-11-23  19:54:32.0');
 
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Volkswagen', 'Golf', 'J1772');
 INSERT INTO CarModels (Brand, Name, SocketShape) VALUES ('Mercedes Benz', 'Gelandewagen', 'Mennekes');
@@ -279,6 +273,37 @@ INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'B-AN532', 'Black');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (9, 'B-RU326', 'Brown');
 INSERT INTO Cars (ModelID, Reg_number, Color) VALUES (10, 'B-RU663', 'Beige');
 
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (1, 2, '2018-11-20 08:10:01.0', '52.5100384, 13.3713969', '2018-11-20 08:20:01.0', '52.5158628, 13.3841342', 12.5, 2.7);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (4, 2, '2018-11-20 08:01:00.0', '52.5158628, 13.3841342', '2018-11-20 08:21:00.0', '52.519252, 13.2889583', 25.1, 8.4);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (2, 3, '2018-11-21 11:03:00.0', '52.515916, 13.2835856', '2018-11-20 11:10:00.0', '52.5165303, 13.3052846', 10.5, 3.1);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (5, 8, '2018-11-21 14:00:45.0', '52.5152188, 13.2999621', '2018-11-21 14:15:45.0', '52.4976656,13.2749799', 15.52, 7.0);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (6, 12, '2018-11-21 17:05:22.0', '52.5073495, 13.2588587', '2018-11-21 17:12:22.0', '52.5227001, 13.3192039', 7.75, 3.7);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (3, 4, '2018-11-22 18:52:22.0', '52.5073495, 13.2588587', '2018-11-22 19:00:03.0', '52.5227001, 13.3192039', 7.5, 3.7);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (1, 13, '2018-11-22 08:36:09.0', '52.5073495, 13.2588587', '2018-11-22 08:41:09.0', '52.5227001, 13.3192039', 4.53, 2.1);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (7, 9, '2018-11-22 09:53:00.0', '52.5073495, 13.2588587', '2018-11-22 10:00:00.0', '52.5227001, 13.3192039', 7.75, 3.7);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (8, 11, '2018-11-22 09:21:25.0', '52.5073495, 13.2588587', '2018-11-22 09:31:25.0', '52.5227001, 13.3192039', 10.05, 6.7);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (9, 10, '2018-11-23 07:39:18.0', '52.5073495, 13.2588587', '2018-11-23 07:45:18.0', '52.5227001, 13.2792039', 2.45, 1.8);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (10, 14, '2018-11-23 08:00:00.0', '52.5158628, 13.3841342', '2018-11-23 08:20:00.0', '52.519252, 13.2889583', 24.35, 8.4);
+INSERT INTO Rents (UserID, CarID, DateTime_start, GPSloc_start, DateTime_end, GPSloc_end, Cost, DistanceKM) VALUES (2, 15, '2018-11-23 16:25:00.0', '52.5073495, 13.2588587', '2018-11-23 16:32:00.0', '52.5227001, 13.3192039', 7.45, 3.7);
+
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (1, 75, 'Good', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (2, 90, 'Good', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (3, 55, 'Normal', '52.5356669, 13.2083623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (4, 87, 'Good', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (5, 72, 'Good', '52.5356669, 13.2083623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (6, 65, 'Normal', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (7, 42, 'Good', '52.5356669, 13.2083623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (8, 98, 'Good', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (9, 98, 'Good', '52.5144978, 13.4752225');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (10, 98, 'Good', '52.5365921,13.2810933');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (11, 98, 'Normal', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (12, 98, 'Good', '52.5365921,13.2810933');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (13, 98, 'Normal', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (14, 98, 'Good', '52.5144978, 13.4752225');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (15, 98, 'Normal', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (16, 98, 'Good', '52.5356669, 13.3583623');
+INSERT INTO AvailableCars(CarID, Charge, Health, GPSloc) VALUES (17, 98, 'Left light does not work' , '52.5144978, 13.4752225');
+
 INSERT INTO Parks (NPlaces, GPSloc) VALUES (50,  '52.5184755, 13.3865654');
 INSERT INTO Parks (NPlaces, GPSloc) VALUES (45,  '52.5174873, 13.3807356');
 INSERT INTO Parks (NPlaces, GPSloc) VALUES (30,  '52.5174873, 13.380735');
@@ -287,7 +312,7 @@ INSERT INTO Parks (NPlaces, GPSloc) VALUES (55,  '52.5175205, 13.3786468');
 INSERT INTO Parks (NPlaces, GPSloc) VALUES (100, '52.5175205, 13.3786468');
 INSERT INTO Parks (NPlaces, GPSloc) VALUES (10,  '52.5176879, 13.3722649');
 
-INSERT INTO ParkingHistory (ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (1, 1,  '2018-11-20 23:00', '2018-11-20 06:00');
+
 INSERT INTO ParkingHistory (ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (2, 3,  '2018-11-20 23:00', '2018-11-20 06:00');
 INSERT INTO ParkingHistory (ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (3, 4,  '2018-11-21 23:00', '2018-11-21 06:00');
 INSERT INTO ParkingHistory (ParkID, CarID, DateTime_arrive, DateTime_leave) VALUES (4, 5,  '2018-11-21 23:00', '2018-11-21 06:00');
@@ -314,20 +339,19 @@ INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (1
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5038338, 13.3803928', 5.55, 'Mennekes');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.51024, 13.3754039', 6.95, 'CSS Combo');
 
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 1, '2018-11-20 16:30:00', '2018-11-20 20:30:00', 30);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 2, '2018-11-21 09:30:00', '2018-11-21 19:30:00', 58.5);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 3, '2018-11-22 17:20:00', '2018-11-22 19:40:00', 17.5);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 4, '2018-11-23 08:30:00', '2018-11-23 10:30:00', 11.3);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 5, '2018-11-24 16:30:00', '2018-11-24 17:30:00', 8.0);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 6, '2018-11-20 11:45:00', '2018-11-20 15:45:00', 23.4);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 2, '2018-11-21 09:30:00', '2018-11-21 19:30:00', 58.5);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 7, '2018-11-21 16:30:00', '2018-11-21 20:30:00', 32);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 11, '2018-11-21 08:30:00', '2018-11-21 20:30:00', 56.5);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 3, '2018-11-22 17:20:00', '2018-11-22 19:40:00', 17.5);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (2, 8, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 23.4);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 12, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 24,2);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (6, 4, '2018-11-23 08:30:00', '2018-11-23 10:30:00', 11.3);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 13, '2018-11-23 12:00:00', '2018-11-23 13:30:00', 8,475);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 9, '2018-11-23 10:30:00', '2018-11-23 20:30:00', 56.5);
 INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 10, '2018-11-24 12:30:00', '2018-11-24 13:30:00', 6.05);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (4, 11, '2018-11-21 08:30:00', '2018-11-21 20:30:00', 56.5);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (3, 12, '2018-11-22 16:30:00', '2018-11-22 20:30:00', 24,2);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (4, 13, '2018-11-23 12:00:00', '2018-11-23 13:30:00', 8,475);
-INSERT INTO ChargingHistory (UID, CarID, DateTime_start) VALUES (1, 14, '2018-11-24 16:30:00', '2018-11-24 18:30:00', 15);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (1, 14, '2018-11-24 16:30:00', '2018-11-24 18:30:00', 15);
+INSERT INTO ChargingHistory (UID, CarID, DateTime_start, DateTime_end, Cost) VALUES (5, 5, '2018-11-24 16:30:00', '2018-11-24 17:30:00', 8.0);
 
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (10, '52.5151250, 13.5041570');
 INSERT INTO Workshops(NPlaces, GPSloc) VALUES (7,  '52.5165847, 13.3141253');

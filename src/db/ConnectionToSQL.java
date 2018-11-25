@@ -14,23 +14,23 @@ public class ConnectionToSQL {
         this.connection = establishConnection();
     }
 
-    public boolean isClosed() {
-        try {
-            return connection.isClosed();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return true;
-        }
-    }
-
-    public void closeConnection() {
-        if (isClosed()) return;
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public boolean isClosed() {
+//        try {
+//            return connection.isClosed();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return true;
+//        }
+//    }
+//
+//    public void closeConnection() {
+//        if (isClosed()) return;
+//        try {
+//            connection.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private Connection establishConnection() {
         try {

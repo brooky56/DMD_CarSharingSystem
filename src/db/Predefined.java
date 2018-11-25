@@ -6,20 +6,27 @@ import main.Table;
 public class Predefined {
 
     // 1st SELECT query
-    // MODIFIED: input - color and part of registration number
+    // MODIFIED: input - color and (optional) part of registration number
     //           output - cars with given color and registration number which contains given part
     public static Table findCar(String input) {
-        if (input.isEmpty()) return null;
-        String[] in = input.split("\\s");
-        if (in.length < 2) return null;
+        if (!input.matches("[a-zA-Z]{3,}(\\s+[a-zA-Z0-9]+)?")) return null;
+        String color, part;
+        if (input.matches("[a-zA-Z]{3,}")) {
+            color = input;
+            part = "";
+        } else {
+            String[] in = input.replaceAll("\\s+", " ").split(" ");
+            color = in[0];
+            part = in[1];
+        }
         return SQLQuery.executeQueryWithOutput(
-                "SELECT CarID, Color, Reg_number FROM Cars WHERE Color LIKE '" + in[0] +
-                        "' AND Reg_number LIKE '%" + in[1] + "%' ORDER BY CarID;");
+                "SELECT CarID, Color, Reg_number FROM Cars WHERE Color LIKE '" + color +
+                        "' AND Reg_number LIKE '%" + part + "%' ORDER BY CarID;");
     }
 
     // 2nd SELECT query
     public static Table socketsPerHour(String input) {
-        if (input.isEmpty()) return null;
+        if (isntDate(input)) return null;
         Table t = SQLQuery.executeQueryWithOutput(
                 "SELECT CAST(strftime('%H', DateTime_start) AS INTEGER), count(DateTime_start) " +
                         "FROM ChargingHistory WHERE date(DateTime_start) = date('" + input +
@@ -36,8 +43,13 @@ public class Predefined {
         return res;
     }
 
+    private static boolean isntDate(String s) {
+        return !(s.equals("now") ||
+                s.matches("(19|20)\\d\\d-((0[1-9]|1[012])-(0[1-9]|[12]\\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)"));
+    }
+
     private static String buildHourCell(int hour, Table t) {
-        String out = Common.int2Hour(hour) + "h - " + Common.int2Hour(hour + 1) + "h: ";
+        String out = int2Hour(hour) + "h - " + int2Hour(hour + 1) + "h: ";
         for (int a = 1; a < t.height; ++a) {
             if ((int) t.getCell(a, 0) == hour) {
                 out += t.getCell(a, 1).toString();
@@ -45,6 +57,12 @@ public class Predefined {
             }
         }
         return out + "0";
+    }
+
+    private static String int2Hour(int h) {
+        if (h < 10) return "0" + h;
+        if (h == 24) return "00";
+        return Integer.toString(h);
     }
 
     // 3rd SELECT query
@@ -85,7 +103,7 @@ public class Predefined {
 
     // 4th SELECT query
     public static Table userPayments(String input) {
-        if (input.isEmpty()) return null;
+        if (Common.isntInt(input) || Integer.parseInt(input) < 1) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT DateTime, Paid AS 'Paid ($)' FROM Payments WHERE UserID = " + input + " AND " +
                         dateConstraint("DateTime", 30) + ";");
@@ -93,7 +111,7 @@ public class Predefined {
 
     // 5th SELECT query
     public static Table rentStatistics(String input) {
-        if (input.isEmpty()) return null;
+        if (isntDate(input)) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT printf('%.2f', avg(DistanceKM)) AS 'Avg. distance (km)', " +
                         "printf('%.2f', avg((CAST(strftime('%s', DateTime_end) AS REAL) - " +
@@ -105,32 +123,27 @@ public class Predefined {
     // 6th SELECT query
     // MODIFIED: input - amount of days (before now) within to gather stats
     public static Table popularPlaces(String input) {
-        if (input.isEmpty() || Common.isntInt(input)) return null;
+        if (Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
+        if (days < 1) return null;
+
         String dc = dateConstraint("DateTime_start", days) + " AND ";
         Table[][] tt = new Table[3][2];
         getTables("start", dc, tt, 0);
         getTables("end", dc, tt, 1);
 
+        int mrows = Math.max(Math.max(tt[0][0].height, tt[0][1].height) - 1, 1);
+        int arows = Math.max(Math.max(tt[1][0].height, tt[1][1].height) - 1, 1);
+        int erows = Math.max(Math.max(tt[2][0].height, tt[2][1].height) - 1, 1);
 
-        int mrows = Math.max(tt[0][0].height, tt[0][1].height) - 1;
-        int arows = Math.max(tt[1][0].height, tt[1][1].height) - 1;
-        int erows = Math.max(tt[2][0].height, tt[2][1].height) - 1;
-        int rowspertime = 0;
-        for (int i = 0; i < 3; ++i) {
-            if (tt[i][0].height > rowspertime) rowspertime = tt[i][0].height;
-            if (tt[i][1].height > rowspertime) rowspertime = tt[i][1].height;
-        }
-        --rowspertime;
-
-        Table res = new Table(1 + rowspertime * 3, 3);
+        Table res = new Table(1 + mrows + arows + erows, 3);
         res.setTitle("Time of day", 0);
         res.setTitle("Top of pick-ups", 1);
         res.setTitle("Top of destinations", 2);
 
-        fillPopularPlacesTable(res, 1, tt[0], "Morning", rowspertime);
-        fillPopularPlacesTable(res, 1 + rowspertime, tt[1], "Afternoon", rowspertime);
-        fillPopularPlacesTable(res, 1 + rowspertime + rowspertime, tt[2], "Evening", rowspertime);
+        fillPopularPlacesTable(res, 1, tt[0], "Morning", mrows);
+        fillPopularPlacesTable(res, 1 + mrows, tt[1], "Afternoon", arows);
+        fillPopularPlacesTable(res, 1 + mrows + arows, tt[2], "Evening", erows);
         return res;
     }
 
@@ -148,9 +161,9 @@ public class Predefined {
         );
     }
 
-    private static void fillPopularPlacesTable(Table res, int row, Table[] t, String time, int rowspertime) {
+    private static void fillPopularPlacesTable(Table res, int row, Table[] t, String time, int rows) {
         res.setCell(time, row, 0);
-        for (int i = 1; i < rowspertime; ++i) {
+        for (int i = 1; i < rows; ++i) {
             res.setCell("", i + row, 0);
         }
         res.setCell(time, row, 0);
@@ -167,7 +180,7 @@ public class Predefined {
         return SQLQuery.executeQueryWithOutput(
                 "SELECT CarID, count(CarID) AS 'Amount of rents' FROM Rents WHERE " +
                         dateConstraint("DateTime_start", 90) +
-                        " GROUP BY CarID ORDER BY count(CarID) ASC " +
+                        " GROUP BY CarID ORDER BY 'Amount of rents' ASC " +
                         "LIMIT CEIL((SELECT count(CarID) FROM Cars) * 0.1);");
     }
 
@@ -176,8 +189,9 @@ public class Predefined {
     // output - average per day distance travelled, income from rents, outlays for charging and amount of charging
     // of every car within last days
     public static Table carStats(String input) {
-        if (input.isEmpty() || Common.isntInt(input)) return null;
+        if (Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
+        if (days < 1) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT CarID, " +
                         avgPer("sum(D)", days, "Avg. distance per day (km)") + ", " +
@@ -199,8 +213,9 @@ public class Predefined {
     // MODIFIED: input - amount of weeks (before now) within to gather stats
     //           output - the most used per week and expensive part types by every workshop
     public static Table oftenRequiredParts(String input) {
-        if (input.isEmpty() || Common.isntInt(input)) return null;
+        if (Common.isntInt(input)) return null;
         int weeks = Integer.parseInt(input);
+        if (weeks < 1) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT WID, PartTypeId, Name, max(Amount) AS 'Avg. amount used per week' FROM " +
                         "(SELECT WID, PartTypeId, Name, CEIL(count(PartID) / " + weeks + ") " +
@@ -214,8 +229,9 @@ public class Predefined {
     // 10th SELECT query
     // MODIFIED: input - amount of days (before now) within to gather stats
     public static Table mostExpensiveCarModel(String input) {
-        if (input.isEmpty() || Common.isntInt(input)) return null;
+        if (Common.isntInt(input)) return null;
         int days = Integer.parseInt(input);
+        if (days < 1) return null;
         return SQLQuery.executeQueryWithOutput(
                 "SELECT ModelID, " +
                         avgPer("(ChargingCost + RepairCost)", days, "Avg. paid per day ($)") +
@@ -229,13 +245,13 @@ public class Predefined {
                         "ORDER BY 'Avg. outlay per day ($)' DESC LIMIT 1;");
     }
 
-    private static String ternaryFullOuterJoin(String t1, String t2, String t3, String keys) {
-        return "WITH C AS (" + fullOuterJoin(t1, t2, keys) + ") " + fullOuterJoin("C", t3, keys);
-    }
-
-    private static String fullOuterJoin(String t1, String t2, String keys) {
-        keys = " USING (" + keys + ")";
-        String s = "SELECT " + t1 + ".*, " + t2 + ".* FROM ";
-        return s + t1 + " LEFT JOIN " + t2 + keys + " UNION " + s + t2 + " LEFT JOIN " + t1 + keys;
-    }
+//    private static String ternaryFullOuterJoin(String t1, String t2, String t3, String keys) {
+//        return "WITH C AS (" + fullOuterJoin(t1, t2, keys) + ") " + fullOuterJoin("C", t3, keys);
+//    }
+//
+//    private static String fullOuterJoin(String t1, String t2, String keys) {
+//        keys = " USING (" + keys + ")";
+//        String s = "SELECT " + t1 + ".*, " + t2 + ".* FROM ";
+//        return s + t1 + " LEFT JOIN " + t2 + keys + " UNION " + s + t2 + " LEFT JOIN " + t1 + keys;
+//    }
 }

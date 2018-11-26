@@ -1,10 +1,10 @@
 package db;
 
-import java.sql.*;
-import java.util.LinkedList;
-
 import main.Common;
 import main.Table;
+
+import java.sql.*;
+import java.util.LinkedList;
 
 public class SQLQuery {
     private SQLQuery() {
@@ -18,7 +18,7 @@ public class SQLQuery {
             c.commit();
             stmt.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Common.debugMessage(e);
         }
     }
 
@@ -55,7 +55,7 @@ public class SQLQuery {
             // Convert list to table and return
             return new Table(list);
         } catch (SQLException e) {
-            e.printStackTrace();
+            Common.debugMessage(e);
             return null;
         }
     }

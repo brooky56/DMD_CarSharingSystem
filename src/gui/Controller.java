@@ -8,13 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import main.Common;
 import main.Table;
-
-import java.sql.SQLException;
 
 public class Controller {
     private static final double SCROLLBAR_WIDTH = 16.;
@@ -83,10 +80,10 @@ public class Controller {
     private void fullFillTableList() {
         ObservableList<String> tableList = FXCollections.observableArrayList();
         Table t = SQLQuery.executeQueryWithOutput(
-                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_master' AND name <> 'sqlite_sequence'");
+                "SELECT name FROM sqlite_master WHERE type = 'table' AND name <> 'sqlite_sequence'");
         for (int i = 1; i < t.height; ++i) {
             tableList.add(t.getCell(i, 0).toString());
-            System.out.println(t.getCell(i, 0).toString());
+            Common.debugMessage(t.getCell(i, 0).toString());
         }
         dbTableBox.setItems(tableList);
     }
@@ -119,16 +116,16 @@ public class Controller {
                     textAreaForInput.setPromptText("Sample input: White AN");
                     break;
                 case "Query 2":
-                    textAreaForInput.setPromptText("Sample input: 2018-11-23");
+                    textAreaForInput.setPromptText("Sample input: 2018-11-22");
                     break;
                 case "Query 3":
-                    textAreaForInput.setPromptText("No input required");
+                    textAreaForInput.setPromptText("Sample input: 21");
                     break;
                 case "Query 4":
                     textAreaForInput.setPromptText("Sample input: 1");
                     break;
                 case "Query 5":
-                    textAreaForInput.setPromptText("Sample input: 2018-11-23");
+                    textAreaForInput.setPromptText("Sample input: 2018-11-22");
                     break;
                 case "Query 6":
                     textAreaForInput.setPromptText("Sample input: 7");
@@ -163,7 +160,7 @@ public class Controller {
                 t = Predefined.socketsPerHour(input);
                 break;
             case "Query 3":
-                t = Predefined.busyPerPeriod();
+                t = Predefined.busyPerPeriod(input);
                 break;
             case "Query 4":
                 t = Predefined.userPayments(input);
@@ -230,7 +227,7 @@ public class Controller {
             final int k = j;
             col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(k).toString()));
             table.getColumns().add(col);
-            System.out.println("Column [" + j + "] ");
+            Common.debugMessage("Column [" + j + "] ");
         }
 
         for (int i = 1; i < t.height; ++i) {
@@ -242,7 +239,7 @@ public class Controller {
                     row.add(t.getCell(i, j).toString());
                 }
             }
-            System.out.println("Row [" + i + "] added " + row);
+            Common.debugMessage("Row [" + i + "] added " + row);
             data.add(row);
         }
         table.setItems(data);

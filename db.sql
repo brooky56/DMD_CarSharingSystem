@@ -112,8 +112,8 @@ CREATE TABLE ChargingHistory
 (
   UID            INTEGER  not null references ChargingStations,
   CarID          INTEGER  not null references Cars,
-  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__:__'),
-  DateTime_end   DATETIME not null default 'now' check(DateTime_end = 'now' OR DateTime_end LIKE '____-__-__ __:__:__'),
+  DateTime_start DATETIME not null check(DateTime_start LIKE '____-__-__ __:__'),
+  DateTime_end   DATETIME not null default 'now' check(DateTime_end = 'now' OR DateTime_end LIKE '____-__-__ __:__'),
   Cost           REAL     not null default 'now' check(Cost = 'now' OR Cost > 0.0)
 );
 
@@ -281,7 +281,7 @@ INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (5, 72, 'Good',
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (6, 65, 'Normal', '52.5356669, 13.3583623');
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (7, 42, 'Good', '52.5356669, 13.2083623');
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (9, 98, 'Good', '52.5144978, 13.4752225');
-INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (10, 98, 'Good', '52.5365921,13.2810933');
+INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (10, 98, 'Good', '52.5365921, 13.2810933');
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (11, 98, 'Normal', '52.5356669, 13.3583623');
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (12, 98, 'Good', '52.5365921, 13.2810933');
 INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (13, 98, 'Normal', '52.5356669, 13.3583623');
@@ -294,7 +294,7 @@ INSERT INTO AvailableCars (CarID, Charge, Health, GPSloc) VALUES (18, 98, 'Good'
 INSERT INTO Rents VALUES (1, 1, '2018-11-20 08:10', '52.5100384, 13.3713969', '2018-11-20 08:20', '52.5158628, 13.3841342', 12.5, 2.7);
 INSERT INTO Rents VALUES (4, 1, '2018-11-20 08:31', '52.5158628, 13.3841342', '2018-11-20 08:51', '52.519252, 13.2889583', 25.1, 8.4);
 INSERT INTO Rents VALUES (2, 3, '2018-11-21 11:03', '52.515916, 13.2835856', '2018-11-20 11:10', '52.5165303, 13.3052846', 10.5, 3.1);
-INSERT INTO Rents VALUES (5, 8, '2018-11-21 14:00', '52.5152188, 13.2999621', '2018-11-21 14:15', '52.4976656,13.2749799', 15.52, 7.0);
+INSERT INTO Rents VALUES (5, 8, '2018-11-21 14:00', '52.5152188, 13.2999621', '2018-11-21 14:15', '52.4976656, 13.2749799', 15.52, 7.0);
 INSERT INTO Rents VALUES (6, 12, '2018-11-21 17:05', '52.5073495, 13.2588587', '2018-11-21 17:12', '52.5227001, 13.3192039', 7.75, 3.7);
 INSERT INTO Rents VALUES (3, 4, '2018-11-22 18:52', '52.5073495, 13.2588587', '2018-11-22 19:00', '52.5227001, 13.3192039', 7.5, 3.7);
 INSERT INTO Rents VALUES (1, 13, '2018-11-22 08:36', '52.5073495, 13.2588587', '2018-11-22 08:41', '52.5227001, 13.3192039', 4.53, 2.1);
@@ -338,17 +338,17 @@ INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (1
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.5038338, 13.3803928', 5.55, 'Mennekes');
 INSERT INTO ChargingStations (NSockets, GPSloc, CostHour, SocketShape) VALUES (10, '52.51024, 13.3754039', 6.95, 'CSS Combo');
 
-INSERT INTO ChargingHistory VALUES (1, 1, '2018-11-20 10:30:00', '2018-11-20 20:30:00', 75);
-INSERT INTO ChargingHistory VALUES (1, 3, '2018-11-20 12:20:00', '2018-11-20 19:20:00', 52.5);
-INSERT INTO ChargingHistory VALUES (2, 8, '2018-11-21 16:30:00', '2018-11-21 20:30:00', 23.4);
-INSERT INTO ChargingHistory VALUES (3, 12, '2018-11-21 18:30:00', '2018-11-21 21:30:00', 18.15);
-INSERT INTO ChargingHistory VALUES (6, 4, '2018-11-22 20:00:00', '2018-11-22 21:00:00', 5.55);
-INSERT INTO ChargingHistory VALUES (4, 13, '2018-11-22 12:00:00', '2018-11-22 13:30:00', 8.475);
-INSERT INTO ChargingHistory VALUES (4, 9, '2018-11-22 11:30:00', '2018-11-22 21:30:00', 56.5);
-INSERT INTO ChargingHistory VALUES (4, 11, '2018-11-22 11:30:00', '2018-11-22 21:30:00', 56.5);
-INSERT INTO ChargingHistory VALUES (3, 10, '2018-11-23 12:30:00', '2018-11-23 13:30:00', 6.05);
-INSERT INTO ChargingHistory VALUES (1, 14, '2018-11-23 12:30:00', '2018-11-23 14:30:00', 15);
-INSERT INTO ChargingHistory VALUES (4, 15, '2018-11-23 17:30:00', '2018-11-23 18:30:00', 8.0);
+INSERT INTO ChargingHistory VALUES (1, 1, '2018-11-20 10:30', '2018-11-20 20:30', 75);
+INSERT INTO ChargingHistory VALUES (1, 3, '2018-11-20 12:20', '2018-11-20 19:20', 52.5);
+INSERT INTO ChargingHistory VALUES (2, 8, '2018-11-21 16:30', '2018-11-21 20:30', 23.4);
+INSERT INTO ChargingHistory VALUES (3, 12, '2018-11-21 18:30', '2018-11-21 21:30', 18.15);
+INSERT INTO ChargingHistory VALUES (6, 4, '2018-11-22 20:00', '2018-11-22 21:00', 5.55);
+INSERT INTO ChargingHistory VALUES (4, 13, '2018-11-22 12:00', '2018-11-22 13:30', 8.475);
+INSERT INTO ChargingHistory VALUES (4, 9, '2018-11-22 11:30', '2018-11-22 21:30', 56.5);
+INSERT INTO ChargingHistory VALUES (4, 11, '2018-11-22 11:30', '2018-11-22 21:30', 56.5);
+INSERT INTO ChargingHistory VALUES (3, 10, '2018-11-23 12:30', '2018-11-23 13:30', 6.05);
+INSERT INTO ChargingHistory VALUES (1, 14, '2018-11-23 12:30', '2018-11-23 14:30', 15);
+INSERT INTO ChargingHistory VALUES (4, 15, '2018-11-23 17:30', '2018-11-23 18:30', 8.0);
 
 INSERT INTO Workshops (NPlaces, GPSloc) VALUES (10, '52.5151250, 13.5041570');
 INSERT INTO Workshops (NPlaces, GPSloc) VALUES (7,  '52.5165847, 13.3141253');

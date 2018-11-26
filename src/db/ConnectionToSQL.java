@@ -1,5 +1,7 @@
 package db;
 
+import main.Common;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,7 +20,7 @@ public class ConnectionToSQL {
 //        try {
 //            return connection.isClosed();
 //        } catch (SQLException e) {
-//            e.printStackTrace();
+//            Common.debugMessage(e);
 //            return true;
 //        }
 //    }
@@ -28,7 +30,7 @@ public class ConnectionToSQL {
 //        try {
 //            connection.close();
 //        } catch (SQLException e) {
-//            e.printStackTrace();
+//            Common.debugMessage(e);
 //        }
 //    }
 
@@ -37,10 +39,10 @@ public class ConnectionToSQL {
             Class.forName("org.sqlite.JDBC");
             Connection c = DriverManager.getConnection("jdbc:sqlite:" + path);
             c.setAutoCommit(false);
-            System.out.println("connectToSQLite: the database is connected through JDBC driver");
+            Common.debugMessage("connectToSQLite: the database is connected through JDBC driver");
             return c;
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            Common.debugMessage(e);
             System.exit(1);
             return null;
         }

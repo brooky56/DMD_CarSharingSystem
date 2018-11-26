@@ -6,14 +6,8 @@ import java.sql.Connection;
 
 public class Common {
     public static final String PATH_Database = "Database.db";
-    private static ConnectionToSQL access;
     public static final String NULL_ELEMENT = "<null>";
-    public static final String Morning_Start = "7";
-    public static final String Morning_End = "10";
-    public static final String Afternoon_Start = "12";
-    public static final String Afternoon_End = "14";
-    public static final String Evening_Start = "17";
-    public static final String Evening_End = "19";
+    private static ConnectionToSQL access;
 
     public static void establishConnection() {
         access = new ConnectionToSQL(PATH_Database);
@@ -32,10 +26,18 @@ public class Common {
         }
     }
 
-    public static boolean isSpaceChar(int code) {
-        return code == 32 || (9 <= code && code <= 13);
+    public static void debugMessage(String s) {
+//        System.out.println(s);
     }
 
+    public static void debugMessage(Exception e) {
+//        e.printStackTrace();
+    }
+
+//    public static boolean isSpaceChar(int code) {
+//        return code == 32 || (9 <= code && code <= 13);
+//    }
+//
 //    public static double square(double d) {
 //        return d * d;
 //    }
